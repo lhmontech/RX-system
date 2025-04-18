@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const connection = require('../database');
 
+//Rota para inclusão de dados - Método POST
 router.post('/', (req, res) => {
     console.log(req.body);
     const {
@@ -40,6 +41,24 @@ router.post('/', (req, res) => {
             }
         }
     );
+});
+
+//Rota para buscar os dados - Método GET
+router.get('/',(req, res) =>{
+    const query = `
+        SELECT * FROM registros
+        ORDER BY id DESC
+        LIMIT 30
+    `;
+
+    connection.query(query, (err, results) => {
+        if (err){
+            console.error('Erro ao buscar registros:', err);
+            res.status(500).json({ error: 'Erro ao buscar registros'});
+        }else{
+            res.json(results);
+        }
+    });
 });
 
 module.exports = router;
