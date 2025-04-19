@@ -1,8 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Registro from './pages/registro';
-import Historico from './pages/historico';
-// Você ainda pode criar o componente de Relatório depois
 
 function App() {
   return (
@@ -18,7 +16,7 @@ function App() {
         {/* Rotas */}
         <Routes>
           <Route path="/registro" element={<Registro />} />
-          <Route path="/historico" element={<Historico />} />
+          <Route path="/historico" element={<div>Histórico ainda não implementado</div>} />
           <Route path="/relatorio" element={<div>Relatório ainda não implementado</div>} />
           <Route path="*" element={<Registro />} />
         </Routes>

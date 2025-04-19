@@ -6,31 +6,33 @@ const connection = require('../database');
 router.post('/', (req, res) => {
     console.log(req.body);
     const {
-        prontuario,
         nomepaciente,
         sexo,
         datanascimento,
         exame,
         qtdincidencias,
-        dataatual,
+        origem,
+        reexposicao,
+        motivo,
         datapedido,
-        horaatual,
         horapedido,
+        horarealizada,
         nometecnico
     } = req.body;
 
     const query = `
     INSERT INTO registros(
-        prontuario, nomepaciente, sexo, datanascimento, exame, qtdincidencias,
-        dataatual, datapedido, horaatual, horapedido, nometecnico
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        nomepaciente, sexo, datanascimento, exame, qtdincidencias, 
+        origem, reexposicao, motivo, datapedido,
+        horapedido, horarealizada, nometecnico
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
     connection.query(
         query,
         [
-            prontuario, nomepaciente, sexo, datanascimento, exame, qtdincidencias,
-            dataatual, datapedido, horaatual, horapedido, nometecnico
+            nomepaciente, sexo, datanascimento, exame, qtdincidencias, origem,
+            reexposicao, motivo, datapedido, horapedido, horarealizada, nometecnico
         ],
         (err, results) => {
             if (err){
@@ -48,7 +50,7 @@ router.get('/',(req, res) =>{
     const query = `
         SELECT * FROM registros
         ORDER BY id DESC
-        LIMIT 30
+        LIMIT 20
     `;
 
     connection.query(query, (err, results) => {
