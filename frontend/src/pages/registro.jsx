@@ -29,7 +29,7 @@ function Registro() {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:3001/api/registros');
+      const response = await axios.post('http://localhost:3001/api/registros', formData);
       setMensagem(response.data.message || 'Registro salvo com sucesso!');
       setFormData({
         nomepaciente: '',
