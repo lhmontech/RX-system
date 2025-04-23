@@ -30,6 +30,7 @@ function Registro() {
 
     try {
       const response = await axios.post('http://localhost:3001/api/registros', formData);
+      await atualizarRegistros(); // Atualiza a tabela
       setMensagem(response.data.message || 'Registro salvo com sucesso!');
       setFormData({
         nomepaciente: '',
@@ -51,18 +52,19 @@ function Registro() {
     }
   };
   //Tabela com a busca dos registros mais recentes
-  const buscarRegistros = async () => {
+  const atualizarRegistros = async () => {
     try {
       const res = await axios.get('http://localhost:3001/api/registros');
-      setRegistros(res.data.slice(0, 20)); // Pega apenas os últimos 20 registros
+      const ultimosRegistros = res.data.slice(0, 20); // Últimos 20 registros
+      setRegistros(ultimosRegistros);
     } catch (err) {
       console.error('Erro ao buscar registros:', err);
     }
   };
 
-  // Buscar registros ao carregar o componente
+  // Buscar registros ao carregar a pagina e logo após inserir um novo
   useEffect(() => {
-    buscarRegistros();
+    atualizarRegistros();
   }, []);
 
   const formatarData = (isoString) => {
@@ -75,6 +77,9 @@ function Registro() {
     <div style={{ padding: '20px' }}>
       <h2>Registrar Exame</h2>
       <form onSubmit={handleSubmit}>
+        <input name="prontuario" placeholder="Prontuário" value={formData.prontuario} onChange={handleChange}/>
+        <button type="submit">Buscar</button>
+        
         <input name="nomepaciente" placeholder="Nome do Paciente" value={formData.nomepaciente} onChange={handleChange} required />
         <select name="sexo" value={formData.sexo} onChange={handleChange}>
           <option value="">Sexo</option>
@@ -84,16 +89,16 @@ function Registro() {
         <input name="datanascimento" type="date" value={formData.datanascimento} onChange={handleChange}/>
         <select name="exame" value={formData.exame} onChange={handleChange} required>
           <option value="">Exame</option>
-          <option value="Torax">Tórax</option>
-          <option value="Cranio">Crânio</option>
-          <option value="Mao">Mão</option>
+          <option value="Tórax">Tórax</option>
+          <option value="Crânio">Crânio</option>
+          <option value="Mão">Mão</option>
         </select>
         <input name="qtdincidencias" type="number" placeholder="Qtd. Incidências" value={formData.qtdincidencias} onChange={handleChange}/>
         <select name="origem" value={formData.origem} onChange={handleChange} required>
           <option value="">Origem</option>
-          <option value="ortop">Ortop.</option>
-          <option value="clinico">Clínico</option>
-          <option value="uci">UCI</option>
+          <option value="Ortop.">Ortop.</option>
+          <option value="Clínico">Clínico</option>
+          <option value="UCI">UCI</option>
         </select>
         <input name="reexposicao" type="text" placeholder="Reexposição" value={formData.reexposicao} onChange={handleChange}/>
         <input name="motivo" type="text" placeholder="Motivo" value={formData.motivo} onChange={handleChange}/>
@@ -118,7 +123,7 @@ function Registro() {
             <th>Origem</th>
             <th>Reexpo.</th>
             <th>Motivo</th>
-            <th>Data Pedido</th>
+            <th>Data Realizada</th>
             <th>Hora Pedido</th>
             <th>Hora Realizada</th>
             <th>Técnico</th>

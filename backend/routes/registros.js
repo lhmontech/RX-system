@@ -63,4 +63,27 @@ router.get('/',(req, res) =>{
     });
 });
 
+//Rota para fazer consultas mais específicas via GET
+router.get('/filtro', (req, res) => {
+    const { dataInicio, dataFim} = req.query;
+
+    if (!dataInicio || !dataFim){
+            return res.status(400).json({ erro: 'Informe dataInicio e dataFim' });
+    }
+
+    const query = `
+        SELECT * FROM registros 
+        WHERE datapedido BETWEEN ? AND ?
+        ORDER BY datapedido DESC`;
+    const values = [dataInicio, dataFim];
+    connection.query(query, values, (err, results) => {
+        if (err) {
+            console.error('Erro ao buscar registros:', err);
+            res.status(500).json({ error: 'Erro ao buscar registros' });
+        } else {
+            res.json(results);
+        }
+    });
+});
+
 module.exports = router;
