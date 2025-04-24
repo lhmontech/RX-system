@@ -1,6 +1,25 @@
 const express = require('express');
 const router = express.Router();
-const connection = require('../database');
+const {connection, connectPacientes} = require('../database');
+
+//Rota para buscar registros através do prontuário - Método GET
+router.get('/prontuario/:id', (req, res) => {
+    const { id } = req.params;
+  
+    const query = 'SELECT * FROM szpaciente WHERE prontuario = ? LIMIT 1';
+  
+    connectPacientes.query(query, [id], (err, results) => {
+      if (err) {
+        return res.status(500).json({ error: 'Erro no banco de dados' });
+      }
+
+      if (results.length === 0) {
+        return res.status(404).json({ message: 'Prontuário não encontrado' });
+      }
+  
+      res.json(results[0]);
+    });
+  });
 
 //Rota para inclusão de dados - Método POST
 router.post('/', (req, res) => {
@@ -14,7 +33,7 @@ router.post('/', (req, res) => {
         origem,
         reexposicao,
         motivo,
-        datapedido,
+        datarealizada,
         horapedido,
         horarealizada,
         nometecnico
@@ -23,7 +42,7 @@ router.post('/', (req, res) => {
     const query = `
     INSERT INTO registros(
         nomepaciente, sexo, datanascimento, exame, qtdincidencias, 
-        origem, reexposicao, motivo, datapedido,
+        origem, reexposicao, motivo, datarealizada,
         horapedido, horarealizada, nometecnico
     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
@@ -32,7 +51,7 @@ router.post('/', (req, res) => {
         query,
         [
             nomepaciente, sexo, datanascimento, exame, qtdincidencias, origem,
-            reexposicao, motivo, datapedido, horapedido, horarealizada, nometecnico
+            reexposicao, motivo, datarealizada, horapedido, horarealizada, nometecnico
         ],
         (err, results) => {
             if (err){
@@ -65,25 +84,50 @@ router.get('/',(req, res) =>{
 
 //Rota para fazer consultas mais específicas via GET
 router.get('/filtro', (req, res) => {
-    const { dataInicio, dataFim} = req.query;
-
-    if (!dataInicio || !dataFim){
-            return res.status(400).json({ erro: 'Informe dataInicio e dataFim' });
+    const { dataInicio, dataFim, exame, sexo, tecnico, idadeInicio, idadeFim } = req.query;
+  
+    let query = `
+      SELECT * 
+      FROM registros 
+      WHERE 1=1`;
+    const values = [];
+  
+    if (dataInicio && dataFim) {
+      query += ' AND datarealizada BETWEEN ? AND ?';
+      values.push(dataInicio, dataFim);
+    }
+  
+    if (exame) {
+      query += ' AND exame = ?';
+      values.push(exame);
+    }
+  
+    if (sexo) {
+      query += ' AND sexo = ?';
+      values.push(sexo);
     }
 
-    const query = `
-        SELECT * FROM registros 
-        WHERE datapedido BETWEEN ? AND ?
-        ORDER BY datapedido DESC`;
-    const values = [dataInicio, dataFim];
+    if (tecnico) {
+      query += ' AND tecnico = ?';
+      values.push(tecnico);
+    }
+
+    if (idadeInicio && idadeFim) {
+      query += ' AND TIMESTAMPDIFF(YEAR, datanascimento, CURDATE()) BETWEEN ? AND ?';
+      values.push(idadeInicio, idadeFim);
+    }
+  
+    query += ' ORDER BY datarealizada DESC';
+  
     connection.query(query, values, (err, results) => {
-        if (err) {
-            console.error('Erro ao buscar registros:', err);
-            res.status(500).json({ error: 'Erro ao buscar registros' });
-        } else {
-            res.json(results);
-        }
+      if (err) {
+        console.error('Erro ao buscar registros:', err);
+        res.status(500).json({ error: 'Erro ao buscar registros' });
+      } else {
+        res.json(results);
+      }
     });
-});
+  });
+  
 
 module.exports = router;

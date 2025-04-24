@@ -3,6 +3,7 @@ import axios from 'axios';
 
 function Registro() {
   const [formData, setFormData] = useState({
+    prontuario: '',
     nomepaciente: '',
     sexo: '',
     datanascimento: '',
@@ -11,7 +12,7 @@ function Registro() {
     origem: '',
     reexposicao: '',
     motivo: '',
-    datapedido: '',
+    datarealizada: '',
     horapedido: '',
     horarealizada: '',
     nometecnico: ''
@@ -33,6 +34,7 @@ function Registro() {
       await atualizarRegistros(); // Atualiza a tabela
       setMensagem(response.data.message || 'Registro salvo com sucesso!');
       setFormData({
+        prontuario: '',
         nomepaciente: '',
         sexo: '',
         datanascimento: '',
@@ -41,7 +43,7 @@ function Registro() {
         origem: '',
         reexposicao: '',
         motivo: '',
-        datapedido: '',
+        datarealizada: '',
         horapedido: '',
         horarealizada: '',
         nometecnico: ''
@@ -67,6 +69,23 @@ function Registro() {
     atualizarRegistros();
   }, []);
 
+  const buscarProntuario = async () => {
+    if (!formData.prontuario) return;
+  try {
+    const response = await axios.get(`http://localhost:3001/api/registros/prontuario/${formData.prontuario}`);
+    const data = response.data;
+    setFormData(prev => ({
+      ...prev,
+      nomepaciente: data.nome,
+      sexo: data.sexo,
+      datanascimento: data.datanascimento.slice(0, 10),
+    }));
+  } catch (err) {
+    console.error(err);
+    alert("Erro ao buscar prontuário");
+  }
+};
+
   const formatarData = (isoString) => {
     if (!isoString) return '';
     const data = new Date(isoString);
@@ -78,13 +97,13 @@ function Registro() {
       <h2>Registrar Exame</h2>
       <form onSubmit={handleSubmit}>
         <input name="prontuario" placeholder="Prontuário" value={formData.prontuario} onChange={handleChange}/>
-        <button type="submit">Buscar</button>
+        <button type="button" onClick={buscarProntuario}>Buscar</button>
         
         <input name="nomepaciente" placeholder="Nome do Paciente" value={formData.nomepaciente} onChange={handleChange} required />
         <select name="sexo" value={formData.sexo} onChange={handleChange}>
           <option value="">Sexo</option>
-          <option value="M">Masculino</option>
-          <option value="F">Feminino</option>
+          <option value="Masculino">Masculino</option>
+          <option value="Feminino">Feminino</option>
         </select>
         <input name="datanascimento" type="date" value={formData.datanascimento} onChange={handleChange}/>
         <select name="exame" value={formData.exame} onChange={handleChange} required>
@@ -102,7 +121,7 @@ function Registro() {
         </select>
         <input name="reexposicao" type="text" placeholder="Reexposição" value={formData.reexposicao} onChange={handleChange}/>
         <input name="motivo" type="text" placeholder="Motivo" value={formData.motivo} onChange={handleChange}/>
-        <input name="datapedido" type="date" value={formData.datapedido} onChange={handleChange} required />
+        <input name="datarealizada" type="date" value={formData.datarealizada} onChange={handleChange} required />
         <input name="horapedido" type="time" value={formData.horapedido} onChange={handleChange} required />
         <input name="horarealizada" type="time" value={formData.horarealizada} onChange={handleChange} required />
         <input name="nometecnico" placeholder="Nome do Técnico" value={formData.nometecnico} onChange={handleChange} required />
@@ -140,7 +159,7 @@ function Registro() {
               <td>{item.origem}</td>
               <td>{item.reexposicao}</td>
               <td>{item.motivo}</td>
-              <td>{formatarData(item.datapedido)}</td>
+              <td>{formatarData(item.datarealizada)}</td>
               <td>{item.horapedido}</td>
               <td>{item.horarealizada}</td>
               <td>{item.nometecnico}</td>
