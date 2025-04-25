@@ -1,17 +1,21 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import Registro from './pages/registro';
 import Relatorio from './pages/relatorio';
 
 function App() {
   return (
     <Router>
-      <div>
+      <div className="app-container">
         {/* Menu de navegação simples */}
-        <nav style={{ marginBottom: '20px' }}>
-          <Link to="/registro" style={{ margin: '10px' }}>Registro</Link>
-          <Link to="/relatorio" style={{ marginRight: '10px' }}>Relatório</Link>
+        <nav className="navbar">
+          <Link to="/registro">Registro</Link>
+          <Link to="/relatorio">Relatório</Link>
         </nav>
+        <div className="content">
+        <Outlet />
+        </div>
 
         {/* Rotas */}
         <Routes>

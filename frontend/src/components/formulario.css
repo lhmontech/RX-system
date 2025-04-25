@@ -1,0 +1,185 @@
+.Linha{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    display: flex;
+    flex-direction: row;
+}
+
+.Coluna1{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-right: 20px;
+}
+.Coluna2{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.Coluna3{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.Coluna4{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.linha1{
+  margin-bottom: -8px;
+}
+
+span{
+  margin-right: 10px;
+}
+
+.SpanNome{
+  margin-right: 195px;
+}
+.SpanSexo{
+  margin-right: 20px;
+}
+.SpanExame{
+  margin-right: 20px;
+}
+.SpanInci{
+  margin-right: 15px;
+}
+.SpanOrigem{
+  margin-right: 15px;
+}
+.SpanReexpo{
+  margin-right: 100px;
+}
+.SpanMotivo{
+  margin-right: 100px;
+}
+
+input{
+    height: 25px;
+  }
+  
+  select{
+    height: 30px;
+  }
+  
+  .CmpProntuario{
+    width: 90px;
+    border-radius: 5px;
+    border: 1px solid grey;
+    margin: 5px;
+  }
+  
+  .CmpNome{
+    width: 220px;
+    border-radius: 5px;
+    border: 1px solid grey;
+    margin-right: 5px;
+  }
+  
+  .CmpSexo{
+    width: 50px;
+    border-radius: 5px;
+    border: 1px solid grey;
+    margin-right: 5px;
+  }
+  
+  .CmpData{
+    width: 100px;
+    height: 27px;
+    border-radius: 5px;
+    border: 1px solid grey;
+    margin-right: 5px;
+  }
+  
+  .CmpExame{
+    width: 75px;
+    border-radius: 5px;
+    border: 1px solid grey;
+    margin-right: 5px;
+  }
+  
+  .CmpInci{
+    width: 35px;
+    border-radius: 5px;
+    border: 1px solid grey;
+    margin-right: 5px;
+  }
+  
+  .CmpOrigem{
+    width: 75px;
+    border-radius: 5px;
+    border: 1px solid grey;
+    margin-right: 5px;
+  }
+  
+  .CmpReexp{
+    width: 50px;
+    border-radius: 5px;
+    border: 1px solid grey;
+    margin-right: 5px;
+  }
+  
+  .CmpMotivo{
+    width: 220px;
+    border-radius: 5px;
+    border: 1px solid grey;
+    margin-right: 5px;
+  }
+  
+  .CmpHora{
+    width: 80px;
+    height: 27px;
+    border-radius: 5px;
+    border: 1px solid grey;
+    margin-right: 5px;
+  }
+  
+  .CmpTecnico{
+    width: 110px;
+    border-radius: 5px;
+    border: 1px solid grey;
+  }
+  
+  .BotaoRegistrar{
+    color: #FFFFFF;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    background-color: #4C6EF5;
+    border-radius: 15px;
+    border: none;
+    padding: 2px 15px;
+    margin-top: 5px;
+    width: 120px;
+    height: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .BotaoRegistrar:hover{
+    background-color: #293c88;
+  }
+
+  .BotaoDireita{
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .BotaoBuscar {
+    color: #FFFFFF;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    background-color: #4C6EF5;
+    border-radius: 15px;
+    border: none;
+    padding: 5px 15px;
+    height: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .BotaoBuscar:hover{
+    background-color: #293c88;
+  }

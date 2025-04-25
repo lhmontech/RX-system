@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-function Registro() {
+const Registro = () => {
   const [formData, setFormData] = useState({
     prontuario: '',
     nomepaciente: '',
@@ -71,20 +71,20 @@ function Registro() {
 
   const buscarProntuario = async () => {
     if (!formData.prontuario) return;
-  try {
-    const response = await axios.get(`http://localhost:3001/api/registros/prontuario/${formData.prontuario}`);
-    const data = response.data;
-    setFormData(prev => ({
-      ...prev,
-      nomepaciente: data.nome,
-      sexo: data.sexo,
-      datanascimento: data.datanascimento.slice(0, 10),
-    }));
-  } catch (err) {
-    console.error(err);
-    alert("Erro ao buscar prontuário");
-  }
-};
+    try {
+      const response = await axios.get(`http://localhost:3001/api/registros/prontuario/${formData.prontuario}`);
+      const data = response.data;
+      setFormData(prev => ({
+        ...prev,
+        nomepaciente: data.nome,
+        sexo: data.sexo,
+        datanascimento: data.datanascimento.slice(0, 10),
+      }));
+    } catch (err) {
+      console.error(err);
+      alert("Erro ao buscar prontuário");
+    }
+  };
 
   const formatarData = (isoString) => {
     if (!isoString) return '';
@@ -93,61 +93,103 @@ function Registro() {
   };
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h2>Registrar Exame</h2>
+    <div className="FramePrincipal">
+      <h1>Registrar Exame</h1>
       <form onSubmit={handleSubmit}>
-        <input name="prontuario" placeholder="Prontuário" value={formData.prontuario} onChange={handleChange}/>
-        <button type="button" onClick={buscarProntuario}>Buscar</button>
-        
-        <input name="nomepaciente" placeholder="Nome do Paciente" value={formData.nomepaciente} onChange={handleChange} required />
-        <select name="sexo" value={formData.sexo} onChange={handleChange}>
+        Prontuário:
+        <input name="prontuario" className="CmpProntuario" placeholder="Prontuário" value={formData.prontuario} onChange={handleChange}/>
+        <button type="button" onClick={buscarProntuario} className="BotaoBuscar">Buscar</button>
+        <br />
+        <div className="Linha">
+          <span className="SpanNome">Nome</span>
+          <span className="SpanSexo">Sexo</span>
+          <div className="Coluna1">
+            <span className="linha1">Data</span>
+            <span>Nascimento</span>
+          </div>         
+          <span className="SpanExame">Exame</span>
+          <span className="SpanInci">Incid.</span>
+          <span className="SpanOrigem">Origem</span>
+          <span className="SpanReexpo">Reexpo.</span>
+          <span className="SpanMotivo">Motivo</span>
+          <div className="Coluna2">
+            <span className="linha1">Data</span>
+            <span>Realização</span>
+          </div>     
+          <div className="Coluna3">
+            <span className="linha1">Hora</span>
+            <span>Solicitção</span>
+          </div>
+          <div className="Coluna4">
+            <span className="linha1">Hora</span>
+            <span>Realizada</span>
+          </div>        
+          <span>Técnico</span>
+        </div>
+        <hr />
+        <input name="nomepaciente" className="CmpNome" placeholder="Nome do Paciente" value={formData.nomepaciente} onChange={handleChange} required />
+        <select name="sexo" className="CmpSexo" value={formData.sexo} onChange={handleChange}>
           <option value="">Sexo</option>
-          <option value="Masculino">Masculino</option>
-          <option value="Feminino">Feminino</option>
+          <option value="Masculino">M</option>
+          <option value="Feminino">F</option>
         </select>
-        <input name="datanascimento" type="date" value={formData.datanascimento} onChange={handleChange}/>
-        <select name="exame" value={formData.exame} onChange={handleChange} required>
+        <input name="datanascimento" className="CmpData" type="date" value={formData.datanascimento} onChange={handleChange}/>
+        <select name="exame" className="CmpExame" value={formData.exame} onChange={handleChange} required>
           <option value="">Exame</option>
-          <option value="Tórax">Tórax</option>
           <option value="Crânio">Crânio</option>
+          <option value="Mandibula">Mandibula</option>
+          <option value="Face">Face</option>
+          <option value="S. Face">S. Face</option>
+          <option value="Órbitas">Órbitas</option>
+          <option value="Cervical">Cervical</option>
+          <option value="Dorsal">Dorsal</option>
+          <option value="Lombar">Lombar</option>
+          <option value="Sacro">Sacro</option>
+          <option value="Tórax">Tórax</option>
+          <option value="Costela">Costela</option>
+          <option value="Esterno">Esterno</option>
+          <option value="Cravicula">Cravicula</option>
+          <option value="Ombro">Ombro</option>
+          <option value="Braço">Braço</option>
+          <option value="Cotovelo">Cotovelo</option>
+          <option value="Antebraço">Antebraço</option>
+          <option value="Punho">Punho</option>
           <option value="Mão">Mão</option>
+          <option value="Dedo">Dedo</option>
+          <option value="Bacia">Bacia</option>
+          <option value="Abdômen">Abdômen</option>
+          <option value="Quadril">Quadril</option>
+          <option value="Fêmur">Fêmur</option>
+          <option value="Joelho">Joelho</option>
+          <option value="Perna">Perna</option>
+          <option value="Tornozelo">Tonozelo</option>
+          <option value="Pé">Pé</option>
+          <option value="Calcâneo">Calacâneo</option>
         </select>
-        <input name="qtdincidencias" type="number" placeholder="Qtd. Incidências" value={formData.qtdincidencias} onChange={handleChange}/>
-        <select name="origem" value={formData.origem} onChange={handleChange} required>
+        <input name="qtdincidencias" className="CmpInci" type="number" placeholder="Inci." value={formData.qtdincidencias} onChange={handleChange}/>
+        <select name="origem" className="CmpOrigem" value={formData.origem} onChange={handleChange} required>
           <option value="">Origem</option>
-          <option value="Ortop.">Ortop.</option>
+          <option value="Ortopedia">Ortopedia</option>
           <option value="Clínico">Clínico</option>
+          <option value="Observação">Observação</option>
+          <option value="Clínica Médica">Clínica Médica</option>
+          <option value="Box">Box</option>
+          <option value="Externo">Externo</option>
+          <option value="Ambulatório">Ambulatório</option>
           <option value="UCI">UCI</option>
         </select>
-        <input name="reexposicao" type="text" placeholder="Reexposição" value={formData.reexposicao} onChange={handleChange}/>
-        <input name="motivo" type="text" placeholder="Motivo" value={formData.motivo} onChange={handleChange}/>
-        <input name="datarealizada" type="date" value={formData.datarealizada} onChange={handleChange} required />
-        <input name="horapedido" type="time" value={formData.horapedido} onChange={handleChange} required />
-        <input name="horarealizada" type="time" value={formData.horarealizada} onChange={handleChange} required />
-        <input name="nometecnico" placeholder="Nome do Técnico" value={formData.nometecnico} onChange={handleChange} required />
-
-        <button type="submit">Registrar</button>
+        <input name="reexposicao" className="CmpReexp" type="text" placeholder="Reexp." value={formData.reexposicao} onChange={handleChange}/>
+        <input name="motivo" className="CmpMotivo" type="text" placeholder="Motivo" value={formData.motivo} onChange={handleChange}/>
+        <input name="datarealizada" className="CmpData" type="date" value={formData.datarealizada} onChange={handleChange} required />
+        <input name="horapedido" className="CmpHora" type="time" value={formData.horapedido} onChange={handleChange} required />
+        <input name="horarealizada" className="CmpHora" type="time" value={formData.horarealizada} onChange={handleChange} required />
+        <input name="nometecnico" className="CmpTecnico" placeholder="Nome do Técnico" value={formData.nometecnico} onChange={handleChange} required />
+        <div className="BotaoDireita"><button type="submit" className="BotaoRegistrar">Registrar</button></div>
+        
       </form>
 
-      {mensagem && <p style={{ marginTop: '10px' }}>{mensagem}</p>}
     {registros.length > 0 ? (
-      <table border="1" cellPadding="3" cellSpacing="0" style={{ marginTop: '20px' }}>
-        <thead>
-          <tr>
-            <th>Nome</th>
-            <th>Sexo</th>
-            <th>Data Nasc.</th>
-            <th>Exame</th>
-            <th>Incid.</th>
-            <th>Origem</th>
-            <th>Reexpo.</th>
-            <th>Motivo</th>
-            <th>Data Realizada</th>
-            <th>Hora Pedido</th>
-            <th>Hora Realizada</th>
-            <th>Técnico</th>
-          </tr>
-        </thead>
+      <table cellPadding="3" cellSpacing="0">
         <tbody>
           {registros.map((item) => (
             <tr key={item.id}>
@@ -171,9 +213,7 @@ function Registro() {
       <p>Nenhum registro encontrado.</p>
     )}
   </div>
-    
   );
 };
-
 
 export default Registro;
