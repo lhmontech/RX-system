@@ -10,18 +10,25 @@ function App() {
   return (
       <div className="app-container">
         <nav className="navbar">
-        <Link to="/registro" className={`link-registro ${currentPath === '/registro' ? 'active-link' : ''}`}>
-          <img 
-            src={currentPath === '/registro' ? '/images/folder-pen-active.png' : '/images/folder-pen.png'} 
-            alt="ícone de registro" 
-          />
-        </Link>
-        <Link to="/relatorio" className={`link-relatorio ${currentPath === '/relatorio' ? 'active-link' : ''}`}>
-          <img 
-            src={currentPath === '/relatorio' ? '/images/folder-kanban-active.png' : '/images/folder-kanban.png'} 
-            alt="ícone de relatório" 
-          />
-        </Link>
+        <img src="images/radiation.png" className="Logo" />
+        <div className="tooltip">
+          <Link to="/registro" className={currentPath === '/registro' ? 'active-link' : ''}>
+            <img 
+              src={currentPath === '/registro' ? '/images/folder-pen-active.png' : '/images/folder-pen.png'} 
+              alt="ícone de registro" 
+            />
+            <span className="tooltipText">Registro</span>
+          </Link>
+        </div>
+        <div className="tooltip">
+          <Link to="/relatorio" className={currentPath === '/relatorio' ? 'active-link' : ''}>
+            <img 
+              src={currentPath === '/relatorio' ? '/images/folder-kanban-active.png' : '/images/folder-kanban.png'} 
+              alt="ícone de relatório" 
+            />
+          </Link>
+          <span className="tooltipText">Relatório</span>
+        </div>
         </nav>
         <div className="FramePrincipal">
         <Routes>

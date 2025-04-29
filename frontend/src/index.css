@@ -3,6 +3,9 @@ body {
   font-weight: 400;
   font-size: 14px;
   background: linear-gradient(to bottom, #B0BAE3, #767E9D);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 .app-container {
@@ -14,6 +17,11 @@ body {
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
   padding: 0px 20px 20px 20px;
+  height: 132vh;
+}
+
+.FrameRelatorio{
+  height: 80vh;
 }
 
 h1 {

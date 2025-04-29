@@ -26,78 +26,149 @@ table tbody tr:nth-child(odd) {
     background-color: #d2d9ff;
 }
 
-td:nth-child(1) {
+/*Tabela da aba registro*/
+.TabelaRegistro td:nth-child(1) {
   width: 210px;
 }
 
-td:nth-child(2) {
+.TabelaRegistro td:nth-child(2) {
   width: 40px;
   text-align: center;
 }
 
-td:nth-child(3) {
+.TabelaRegistro td:nth-child(3) {
   width: 100px;
   text-align: center;
 }
 
-td:nth-child(4) {
+.TabelaRegistro td:nth-child(4) {
   width: 75px;
   text-align: center;
 }
 
-td:nth-child(5) {
+.TabelaRegistro td:nth-child(5) {
   width: 30px;
   text-align: center;
 }
 
-td:nth-child(6) {
+.TabelaRegistro td:nth-child(6) {
   width: 90px;
   text-align: center;
 }
 
-td:nth-child(7) {
+.TabelaRegistro td:nth-child(7) {
   width: 40px;
   text-align: center;
 }
 
-td:nth-child(8) {
+.TabelaRegistro td:nth-child(8) {
   width: 190px;
   text-align: center;
 }
 
-td:nth-child(9) {
+.TabelaRegistro td:nth-child(9) {
   width: 100px;
   text-align: center;
 }
 
-td:nth-child(10) {
+.TabelaRegistro td:nth-child(10) {
   width: 70px;
   text-align: center;
 }
 
-td:nth-child(11) {
+.TabelaRegistro td:nth-child(11) {
   width: 70px;
   text-align: center;
 }
 
-td:nth-child(12) {
+.TabelaRegistro td:nth-child(12) {
   width: 115px;
+  text-align: center;
+}
+
+.TabelaRegistro td:nth-child(13) {
+  width: 20px;
   text-align: center;
 }
 
 .BotaoExcluir {
   background: transparent;
   border: none;
-  border-radius: 50px;
-  color: #e63e3e;
-  font-size: 14px;
-  font-weight: 900;
+  border-radius: 2px;
+  color: #3d3d3d;
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
   transition: color 0.3s ease;
-  transition: background 0.5s ease;
+  transition: background-color 0.3s ease;
 }
 
 .BotaoExcluir:hover {
   color: #ffe6e6;
-  background: #f06969;
+  background-color: #f06969;
+}
+
+/*Tabela da aba Relatório*/
+.TabelaRelatorio td:nth-child(1) {
+  width: 210px;
+}
+
+.TabelaRelatorio td:nth-child(2) {
+  width: 20px;
+  text-align: center;
+}
+
+.TabelaRelatorio td:nth-child(3) {
+  width: 100px;
+  text-align: center;
+}
+
+.TabelaRelatorio td:nth-child(4) {
+  width: 60px;
+  text-align: center;
+}
+
+.TabelaRelatorio td:nth-child(5) {
+  width: 75px;
+  text-align: center;
+}
+
+.TabelaRelatorio td:nth-child(6) {
+  width: 20px;
+  text-align: center;
+}
+
+.TabelaRelatorio td:nth-child(7) {
+  width: 90px;
+  text-align: center;
+}
+
+.TabelaRelatorio td:nth-child(8) {
+  width: 40px;
+  text-align: center;
+}
+
+.TabelaRelatorio td:nth-child(9) {
+  width: 190px;
+  text-align: center;
+}
+
+.TabelaRelatorio td:nth-child(10) {
+  width: 100px;
+  text-align: center;
+}
+
+.TabelaRelatorio td:nth-child(11) {
+  width: 70px;
+  text-align: center;
+}
+
+.TabelaRelatorio td:nth-child(12) {
+  width: 70px;
+  text-align: center;
+}
+
+.TabelaRelatorio td:nth-child(13) {
+  width: 115px;
+  text-align: center;
 }

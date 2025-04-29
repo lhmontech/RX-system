@@ -15,7 +15,7 @@ const connectPacientes = mysql.createConnection({
   host: process.env.PACIENTES_DB_HOST,
   user: process.env.PACIENTES_DB_USER,
   password: process.env.PACIENTES_DB_PASSWORD,
-  database: process.env.PACIENTES_DB_NAME,
+  database: process.env.PACIENTES_DB_DATABASE,
   port: process.env.PACIENTES_DB_PORT
 });
   

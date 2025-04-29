@@ -202,7 +202,7 @@ const Registro = () => {
       </form>
 
     {registros.length > 0 ? (
-      <table cellPadding="3" cellSpacing="0">
+      <table cellPadding="3" cellSpacing="0" className="TabelaRegistro">
         <tbody>
           {registros.map((item) => (
             <tr key={item.id}>
@@ -219,7 +219,7 @@ const Registro = () => {
               <td>{item.horarealizada}</td>
               <td>{item.nometecnico}</td>
               <td>
-              <button onClick={() => excluirRegistro(item.id)} className="BotaoExcluir">X</button>
+              <button onClick={() => excluirRegistro(item.id)} className="BotaoExcluir">x</button>
               </td>
             </tr>
           ))}

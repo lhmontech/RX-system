@@ -9,7 +9,7 @@ const Relatorio = () =>{
   const [registros, setRegistros] = useState([]);
   const [exame, setExame] = useState('');
   const [sexo, setSexo] = useState('');
-  const [tecnico, setTecnico] = useState('');
+  const [origem, setOrigem] = useState('');
   const [idadeInicio, setIdadeInicio] = useState('');
   const [idadeFim, setIdadeFim] = useState('');
 
@@ -22,7 +22,7 @@ const Relatorio = () =>{
       if (dataFim) params.append("dataFim", dataFim);
       if (exame) params.append("exame", exame);
       if (sexo) params.append("sexo", sexo);
-      if (tecnico) params.append("tecnico", tecnico);
+      if (origem) params.append("origem", origem);
       if (idadeInicio) params.append("idadeInicio", idadeInicio);
       if (idadeFim) params.append("idadeFim", idadeFim);
         
@@ -34,7 +34,13 @@ const Relatorio = () =>{
   };
 
   const exportarExcel = () => {
-    const ws = XLSX.utils.json_to_sheet(registros);
+    const registrosFormatados = registros.map(registro => ({
+      ...registro,
+      datanascimento: formatarData(registro.datanascimento),
+      datarealizada: formatarData(registro.datarealizada),
+    }));
+
+    const ws = XLSX.utils.json_to_sheet(registrosFormatados);
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "Registros");
     const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
@@ -63,8 +69,8 @@ const Relatorio = () =>{
   
 
   return (
-    <div>
-      <h2>Filtrar por período</h2>
+    <div className="FrameRelatorio">
+      <h1>Relatórios</h1>
       <input className="CmpData" type="date" value={dataInicio} onChange={(e) => setDataInicio(e.target.value)}/>
       <input className="CmpData" type="date" value={dataFim} onChange={(e) => setDataFim(e.target.value)}/>
       
@@ -105,7 +111,7 @@ const Relatorio = () =>{
           <option value="M">M</option>
           <option value="F">F</option>
       </select>
-      <input className="CmpNome" type="text" placeholder="Técnico" value={tecnico} onChange={(e) => setTecnico(e.target.value)}/>
+      <input className="CmpNome" type="text" placeholder="Origem" value={origem} onChange={(e) => setOrigem(e.target.value)}/>
       <input className="CmpOrigem" type="number" placeholder="Idade inicial" value={idadeInicio} onChange={(e) => setIdadeInicio(e.target.value)}/>
       <input className="CmpOrigem" type="number" placeholder="Idade final" value={idadeFim} onChange={(e) => setIdadeFim(e.target.value)}/>
       <button className="BotaoBuscar" onClick={buscarRegistros}>
@@ -117,7 +123,33 @@ const Relatorio = () =>{
 
       <div>
         <h3>Resultados:</h3>
-        <table cellPadding="3" cellSpacing="0">
+        <div className="Linha">
+          <span className="SpanNome">Nome</span>
+          <span className="SpanSexo">Sexo</span>
+          <div className="Coluna1">
+            <span className="linha1">Data</span>
+            <span>Nascimento</span>
+          </div>         
+          <span className="SpanExame">Exame</span>
+          <span className="SpanInci">Incid.</span>
+          <span className="SpanOrigem">Origem</span>
+          <span className="SpanReexpo">Reexpo.</span>
+          <span className="SpanMotivo">Motivo</span>
+          <div className="Coluna2">
+            <span className="linha1">Data</span>
+            <span>Realização</span>
+          </div>     
+          <div className="Coluna3">
+            <span className="linha1">Hora</span>
+            <span>Solicitção</span>
+          </div>
+          <div className="Coluna4">
+            <span className="linha1">Hora</span>
+            <span>Realizada</span>
+          </div>        
+          <span>Técnico</span>
+        </div>
+        <table cellPadding="3" cellSpacing="0" className="TabelaRelatorio">
           <tbody>
             {registros.map((item, index) => (
               <tr key={item.id}>

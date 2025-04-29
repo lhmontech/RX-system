@@ -1,5 +1,4 @@
 .navbar {
-  width: 50px;
   background-color: #e0e0e0;
   display: flex;
   flex-direction: column;
@@ -12,14 +11,50 @@
   
   .navbar a {
   margin: 10px 0;
+  padding: 5px 5px 0 5px;
+  position: relative;
+  display: inline-block;
+}
+
+.Logo {
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 .active-link{
   background-color: #4c6ef5;
-  border-radius: 15px;
+  border-radius: 10px;
   padding: 5px 5px 0 5px;
+  transition: all 0.5s ease;
 }
 
 img {
   width: 30px;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltipText {
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%);
+  background-color: #414141;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 10px;
+  white-space: nowrap;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  margin-left: 2px;
+  z-index: 10;
+}
+
+.tooltip:hover .tooltipText {
+  visibility: visible;
+  opacity: 1;
 }

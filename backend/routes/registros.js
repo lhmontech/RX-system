@@ -84,7 +84,7 @@ router.get('/',(req, res) =>{
 
 //Rota para fazer consultas mais específicas via GET
 router.get('/filtro', (req, res) => {
-  const { dataInicio, dataFim, exame, sexo, nometecnico, idadeInicio, idadeFim } = req.query;
+  const { dataInicio, dataFim, exame, sexo, origem, idadeInicio, idadeFim } = req.query;
   
   let query = `
     SELECT * 
@@ -107,9 +107,9 @@ router.get('/filtro', (req, res) => {
     values.push(sexo);
   }
 
-  if (nometecnico) {
-    query += ' AND nometecnico = ?';
-    values.push(nometecnico);
+  if (origem) {
+    query += ' AND origem = ?';
+    values.push(origem);
   }
 
   if (idadeInicio && idadeFim) {
