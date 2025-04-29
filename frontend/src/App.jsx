@@ -1,30 +1,37 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
 import Registro from './pages/registro';
 import Relatorio from './pages/relatorio';
 
 function App() {
+  const location = useLocation();
+  const currentPath = location.pathname;
   return (
-    <Router>
       <div className="app-container">
-        {/* Menu de navegação simples */}
         <nav className="navbar">
-          <Link to="/registro">Registro</Link>
-          <Link to="/relatorio">Relatório</Link>
+        <Link to="/registro" className={`link-registro ${currentPath === '/registro' ? 'active-link' : ''}`}>
+          <img 
+            src={currentPath === '/registro' ? '/images/folder-pen-active.png' : '/images/folder-pen.png'} 
+            alt="ícone de registro" 
+          />
+        </Link>
+        <Link to="/relatorio" className={`link-relatorio ${currentPath === '/relatorio' ? 'active-link' : ''}`}>
+          <img 
+            src={currentPath === '/relatorio' ? '/images/folder-kanban-active.png' : '/images/folder-kanban.png'} 
+            alt="ícone de relatório" 
+          />
+        </Link>
         </nav>
-        <div className="content">
-        <Outlet />
-        </div>
-
-        {/* Rotas */}
+        <div className="FramePrincipal">
         <Routes>
           <Route path="/registro" element={<Registro />} />
           <Route path="/relatorio" element={<Relatorio />} />
           <Route path="*" element={<Registro />} />
         </Routes>
+        <Outlet />
+        </div>
       </div>
-    </Router>
   );
 }
 

@@ -70,7 +70,6 @@ router.get('/',(req, res) =>{
   const query = `
     SELECT * FROM registros
     ORDER BY id DESC
-    LIMIT 20
   `;
 
   connection.query(query, (err, results) => {
@@ -85,7 +84,7 @@ router.get('/',(req, res) =>{
 
 //Rota para fazer consultas mais específicas via GET
 router.get('/filtro', (req, res) => {
-  const { dataInicio, dataFim, exame, sexo, tecnico, idadeInicio, idadeFim } = req.query;
+  const { dataInicio, dataFim, exame, sexo, nometecnico, idadeInicio, idadeFim } = req.query;
   
   let query = `
     SELECT * 
@@ -108,9 +107,9 @@ router.get('/filtro', (req, res) => {
     values.push(sexo);
   }
 
-  if (tecnico) {
-    query += ' AND tecnico = ?';
-    values.push(tecnico);
+  if (nometecnico) {
+    query += ' AND nometecnico = ?';
+    values.push(nometecnico);
   }
 
   if (idadeInicio && idadeFim) {
@@ -124,6 +123,22 @@ router.get('/filtro', (req, res) => {
     if (err) {
       console.error('Erro ao buscar registros:', err);
       res.status(500).json({ error: 'Erro ao buscar registros' });
+    } else {
+      res.json(results);
+    }
+  });
+});
+
+
+//Rota para deletar um registro - Método DELETE
+router.delete('/:id', (req, res) => {
+  const id = req.params.id;
+  const query = 'DELETE FROM registros WHERE id = ?';
+
+  connection.query(query, [id], (err, results) => {
+    if (err) {
+      console.error('Erro ao excluir registros:', err);
+      res.status(500).json({ error: 'Erro ao excluir registros' });
     } else {
       res.json(results);
     }

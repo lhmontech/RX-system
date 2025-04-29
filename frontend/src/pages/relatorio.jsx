@@ -63,59 +63,63 @@ const Relatorio = () =>{
   
 
   return (
-    <div style={{ padding: '20px' }}>
+    <div>
       <h2>Filtrar por período</h2>
-      <input
-        type="date"
-        value={dataInicio}
-        onChange={(e) => setDataInicio(e.target.value)}
-      />
-      <input
-        type="date"
-        value={dataFim}
-        onChange={(e) => setDataFim(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Tipo de exame"
-        value={exame}
-        onChange={(e) => setExame(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Sexo"
-        value={sexo}
-        onChange={(e) => setSexo(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Técnico"
-        value={tecnico}
-        onChange={(e) => setTecnico(e.target.value)}
-      />
-      <input
-        type="number"
-        placeholder="Idade inicial"
-        value={idadeInicio}
-        onChange={(e) => setIdadeInicio(e.target.value)}
-      />
-      <input
-        type="number"
-        placeholder="Idade final"
-        value={idadeFim}
-        onChange={(e) => setIdadeFim(e.target.value)}
-      />
-      <button onClick={buscarRegistros}>
+      <input className="CmpData" type="date" value={dataInicio} onChange={(e) => setDataInicio(e.target.value)}/>
+      <input className="CmpData" type="date" value={dataFim} onChange={(e) => setDataFim(e.target.value)}/>
+      
+      <select name="exame" className="CmpOrigem" placeholder="Tipo de exame" value={exame} onChange={(e) => setExame(e.target.value)}>
+          <option value="">Exame</option>
+          <option value="Crânio">Crânio</option>
+          <option value="Mandibula">Mandibula</option>
+          <option value="Face">Face</option>
+          <option value="S. Face">S. Face</option>
+          <option value="Órbitas">Órbitas</option>
+          <option value="Cervical">Cervical</option>
+          <option value="Dorsal">Dorsal</option>
+          <option value="Lombar">Lombar</option>
+          <option value="Sacro">Sacro</option>
+          <option value="Tórax">Tórax</option>
+          <option value="Costela">Costela</option>
+          <option value="Esterno">Esterno</option>
+          <option value="Cravicula">Cravicula</option>
+          <option value="Ombro">Ombro</option>
+          <option value="Braço">Braço</option>
+          <option value="Cotovelo">Cotovelo</option>
+          <option value="Antebraço">Antebraço</option>
+          <option value="Punho">Punho</option>
+          <option value="Mão">Mão</option>
+          <option value="Dedo">Dedo</option>
+          <option value="Bacia">Bacia</option>
+          <option value="Abdômen">Abdômen</option>
+          <option value="Quadril">Quadril</option>
+          <option value="Fêmur">Fêmur</option>
+          <option value="Joelho">Joelho</option>
+          <option value="Perna">Perna</option>
+          <option value="Tornozelo">Tonozelo</option>
+          <option value="Pé">Pé</option>
+          <option value="Calcâneo">Calacâneo</option>
+      </select>
+      <select name="sexo" className="CmpOrigem" value={sexo} onChange={(e) => setSexo(e.target.value)}>
+          <option value="">Sexo</option>
+          <option value="M">M</option>
+          <option value="F">F</option>
+      </select>
+      <input className="CmpNome" type="text" placeholder="Técnico" value={tecnico} onChange={(e) => setTecnico(e.target.value)}/>
+      <input className="CmpOrigem" type="number" placeholder="Idade inicial" value={idadeInicio} onChange={(e) => setIdadeInicio(e.target.value)}/>
+      <input className="CmpOrigem" type="number" placeholder="Idade final" value={idadeFim} onChange={(e) => setIdadeFim(e.target.value)}/>
+      <button className="BotaoBuscar" onClick={buscarRegistros}>
         Buscar
       </button>
-      <button onClick={exportarExcel} disabled={registros.length === 0}>
+      <button className="BotaoExportar" onClick={exportarExcel} disabled={registros.length === 0}>
         Exportar para Excel
       </button>
 
       <div>
         <h3>Resultados:</h3>
-        <table border="1" cellPadding="3" cellSpacing="0" style={{ marginTop: '20px' }}>
-          <tbody>{registros.map((item, index) => (
+        <table cellPadding="3" cellSpacing="0">
+          <tbody>
+            {registros.map((item, index) => (
               <tr key={item.id}>
                 <td>{item.nomepaciente}</td>
                 <td>{item.sexo}</td>
@@ -131,7 +135,8 @@ const Relatorio = () =>{
                 <td>{item.horarealizada}</td>
                 <td>{item.nometecnico}</td>
               </tr>
-            ))}</tbody>
+            ))}
+          </tbody>
         </table>  
       </div>
     </div>

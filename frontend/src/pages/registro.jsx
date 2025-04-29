@@ -17,7 +17,7 @@ const Registro = () => {
     horarealizada: '',
     nometecnico: ''
   });
-
+  
   const [mensagem, setMensagem] = useState('');
   const [registros, setRegistros] = useState([]); // Armazenando os registros para exibir na tabela
 
@@ -86,6 +86,19 @@ const Registro = () => {
     }
   };
 
+  const excluirRegistro = async (id) => {
+    const confirmar = window.confirm('Tem certeza que deseja excluir este registro?');
+    if (!confirmar) return;
+  
+    try {
+      const resposta = await axios.delete(`http://localhost:3001/api/registros/${id}`);
+      if (resposta.status === 200) {
+        await atualizarRegistros();
+      }
+    } catch (erro) {
+      console.error('Erro ao excluir:', erro);
+    }
+  };
   const formatarData = (isoString) => {
     if (!isoString) return '';
     const data = new Date(isoString);
@@ -93,7 +106,7 @@ const Registro = () => {
   };
 
   return (
-    <div className="FramePrincipal">
+    <div>
       <h1>Registrar Exame</h1>
       <form onSubmit={handleSubmit}>
         Prontuário:
@@ -129,9 +142,9 @@ const Registro = () => {
         <hr />
         <input name="nomepaciente" className="CmpNome" placeholder="Nome do Paciente" value={formData.nomepaciente} onChange={handleChange} required />
         <select name="sexo" className="CmpSexo" value={formData.sexo} onChange={handleChange}>
-          <option value="">Sexo</option>
-          <option value="Masculino">M</option>
-          <option value="Feminino">F</option>
+          <option value=""></option>
+          <option value="M">M</option>
+          <option value="F">F</option>
         </select>
         <input name="datanascimento" className="CmpData" type="date" value={formData.datanascimento} onChange={handleChange}/>
         <select name="exame" className="CmpExame" value={formData.exame} onChange={handleChange} required>
@@ -166,7 +179,7 @@ const Registro = () => {
           <option value="Pé">Pé</option>
           <option value="Calcâneo">Calacâneo</option>
         </select>
-        <input name="qtdincidencias" className="CmpInci" type="number" placeholder="Inci." value={formData.qtdincidencias} onChange={handleChange}/>
+        <input name="qtdincidencias" className="CmpInci" placeholder="Nº" type="number" value={formData.qtdincidencias} onChange={handleChange}/>
         <select name="origem" className="CmpOrigem" value={formData.origem} onChange={handleChange} required>
           <option value="">Origem</option>
           <option value="Ortopedia">Ortopedia</option>
@@ -205,6 +218,9 @@ const Registro = () => {
               <td>{item.horapedido}</td>
               <td>{item.horarealizada}</td>
               <td>{item.nometecnico}</td>
+              <td>
+              <button onClick={() => excluirRegistro(item.id)} className="BotaoExcluir">X</button>
+              </td>
             </tr>
           ))}
         </tbody>

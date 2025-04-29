@@ -73,14 +73,14 @@ input{
   }
   
   .CmpNome{
-    width: 220px;
+    width: 210px;
     border-radius: 5px;
     border: 1px solid grey;
     margin-right: 5px;
   }
   
   .CmpSexo{
-    width: 50px;
+    width: 40px;
     border-radius: 5px;
     border: 1px solid grey;
     margin-right: 5px;
@@ -102,35 +102,35 @@ input{
   }
   
   .CmpInci{
-    width: 35px;
+    width: 30px;
     border-radius: 5px;
     border: 1px solid grey;
     margin-right: 5px;
   }
   
   .CmpOrigem{
-    width: 75px;
+    width: 90px;
     border-radius: 5px;
     border: 1px solid grey;
     margin-right: 5px;
   }
   
   .CmpReexp{
-    width: 50px;
+    width: 40px;
     border-radius: 5px;
     border: 1px solid grey;
     margin-right: 5px;
   }
   
   .CmpMotivo{
-    width: 220px;
+    width: 180px;
     border-radius: 5px;
     border: 1px solid grey;
     margin-right: 5px;
   }
   
   .CmpHora{
-    width: 80px;
+    width: 70px;
     height: 27px;
     border-radius: 5px;
     border: 1px solid grey;
@@ -138,7 +138,7 @@ input{
   }
   
   .CmpTecnico{
-    width: 110px;
+    width: 140px;
     border-radius: 5px;
     border: 1px solid grey;
   }
@@ -147,7 +147,7 @@ input{
     color: #FFFFFF;
     font-family: 'Poppins', sans-serif;
     font-size: 14px;
-    background-color: #4C6EF5;
+    background-color: #4c6ef5;
     border-radius: 15px;
     border: none;
     padding: 2px 15px;
@@ -175,11 +175,35 @@ input{
     border-radius: 15px;
     border: none;
     padding: 5px 15px;
+    margin: 5px 5px 5px 0px;
     height: 30px;
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
 
-  .BotaoBuscar:hover{
+  .BotaoBuscar:hover {
     background-color: #293c88;
+  }
+
+  .BotaoExportar {
+    color: #e7e7e7;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    background-color: #4C6EF5;
+    border-radius: 15px;
+    border: none;
+    padding: 5px 15px;
+    margin: 5px 5px 5px 0px;
+    height: 30px;
+    transition: background-color 0.3s ease;
+  }
+
+  .BotaoExportar:hover {
+    cursor: pointer;
+    background-color: #293c88;
+  }
+
+  .BotaoExportar:disabled {
+    cursor: auto;
+    background-color: #7d7d7e;
   }
