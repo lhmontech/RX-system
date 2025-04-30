@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Trash2 } from 'lucide-react';
 
 const Registro = () => {
   const [formData, setFormData] = useState({
@@ -113,7 +114,7 @@ const Registro = () => {
         <input name="prontuario" className="CmpProntuario" placeholder="Prontuário" value={formData.prontuario} onChange={handleChange}/>
         <button type="button" onClick={buscarProntuario} className="BotaoBuscar">Buscar</button>
         <br />
-        <div className="Linha">
+        <div className="LinhaRegistro">
           <span className="SpanNome">Nome</span>
           <span className="SpanSexo">Sexo</span>
           <div className="Coluna1">
@@ -219,7 +220,9 @@ const Registro = () => {
               <td>{item.horarealizada}</td>
               <td>{item.nometecnico}</td>
               <td>
-              <button onClick={() => excluirRegistro(item.id)} className="BotaoExcluir">x</button>
+              <button onClick={() => excluirRegistro(item.id)} className="BotaoExcluir">
+                <Trash2 className="icon"/>
+              </button>
               </td>
             </tr>
           ))}

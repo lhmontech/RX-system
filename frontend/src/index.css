@@ -17,11 +17,11 @@ body {
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
   padding: 0px 20px 20px 20px;
-  height: 132vh;
+
 }
 
 .FrameRelatorio{
-  height: 80vh;
+  height: 100vh;
 }
 
 h1 {

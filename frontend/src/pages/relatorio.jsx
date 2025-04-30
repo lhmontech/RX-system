@@ -123,13 +123,14 @@ const Relatorio = () =>{
 
       <div>
         <h3>Resultados:</h3>
-        <div className="Linha">
+        <div className="LinhaRelatorio">
           <span className="SpanNome">Nome</span>
           <span className="SpanSexo">Sexo</span>
           <div className="Coluna1">
             <span className="linha1">Data</span>
             <span>Nascimento</span>
-          </div>         
+          </div>
+          <span className="SpanIdade">Idade</span>         
           <span className="SpanExame">Exame</span>
           <span className="SpanInci">Incid.</span>
           <span className="SpanOrigem">Origem</span>
