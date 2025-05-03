@@ -1,145 +1,147 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { DataGrid, getGridStringOperators } from '@mui/x-data-grid'; // Importa o DataGrid do MUI em Pt-br
-import { Button, TextField, Box } from '@mui/material'; // Para os componentes de UI
-import * as XLSX from 'xlsx';
+import React, { useState } from "react";
+import axios from "axios";
+import { Trash2 } from "lucide-react";
 
-const Relatorios = () => {
-    const [registros, setRegistros] = useState([]);
-    const [dataInicio, setDataInicio] = useState('');
-    const [dataFim, setDataFim] = useState('');
+const Historico = () => {
+  const [dataInicio, setDataInicio] = useState("");
+  const [dataFim, setDataFim] = useState("");
+  const [registros, setRegistros] = useState([]);
 
-    useEffect(() => {
-        const buscarRegistros = async () => {
-            try {
-                const res = await axios.get('http://localhost:3001/api/registros');
-                setRegistros(res.data.slice(0, 20)); // Mostra os 20 mais recentes
-            } catch (err) {
-                console.error('Erro ao buscar registros:', err);
-            }
-        };
+  const buscarRegistros = async () => {
+    try {
+      const params = new URLSearchParams();
 
-        buscarRegistros();
-    }, []);
+      if (dataInicio) params.append("dataInicio", dataInicio);
+      if (dataFim) params.append("dataFim", dataFim);
 
-    const buscarPorPeriodo = async () => {
-        if (!dataInicio || !dataFim) {
-            alert('Preencha as duas datas!');
-            return;
-        }
-        try {
-            const res = await axios.get(`http://localhost:3001/api/registros?inicio=${dataInicio}&fim=${dataFim}`);
-            setRegistros(res.data);
-        } catch (err) {
-            console.error('Erro ao buscar registros por período:', err);
-        }
-    };
+      const response = await axios.get(
+        `http://localhost:3001/api/registros/filtro?${params.toString()}`
+      );
+      setRegistros(response.data);
+    } catch (error) {
+      console.error("Erro ao buscar registros:", error);
+      alert("Erro ao buscar registros");
+    }
+  };
 
-    const formatarData = (isoString) => {
-        if (!isoString) return '';
-        const data = new Date(isoString);
-        return data.toLocaleDateString('pt-BR');
-      };
-    
-    const onlyContainsOperator = getGridStringOperators().filter(
-        (op) => op.value === 'contains'
+  const excluirRegistro = async (id) => {
+    const confirmar = window.confirm(
+      "Tem certeza que deseja excluir este registro?"
     );
+    if (!confirmar) return;
 
-    const localeTextPTBR = {
-         // Geral
-        noRowsLabel: 'Nenhuma linha',
-        noResultsOverlayLabel: 'Nenhum resultado encontrado.',
-        errorOverlayDefaultLabel: 'Ocorreu um erro.',
+    try {
+      const resposta = await axios.delete(
+        `http://localhost:3001/api/registros/${id}`
+      );
+      if (resposta.status === 200) {
+        await buscarRegistros();
+      }
+    } catch (erro) {
+      console.error("Erro ao excluir:", erro);
+      alert("Erro ao excluir o registro");
+    }
+  };
 
-        // Export selector toolbar button text
-        toolbarExport: 'Exportar',
-        toolbarExportLabel: 'Exportar',
+  const formatarData = (isoString) => {
+    if (!isoString) return "";
+    const data = new Date(isoString);
+    return data.toLocaleDateString("pt-BR");
+  };
 
-        // Columns panel text
-        columnsPanelDragIconLabel: 'Reordenar coluna',
-        columnsPanelShowAllButton: 'Mostrar todas',
-        columnsPanelHideAllButton: 'Ocultar todas',
+  const calcularIdade = (dataNasc) => {
+    const hoje = new Date();
+    const nascimento = new Date(dataNasc);
+    let idade = hoje.getFullYear() - nascimento.getFullYear();
+    const m = hoje.getMonth() - nascimento.getMonth();
 
-        // Filter panel text
-        filterPanelDeleteIconLabel: 'Excluir',
-        filterPanelOperator: 'Operador',
-        filterPanelColumns: 'Colunas',
-        filterPanelInputLabel: 'Valor',
+    if (m < 0 || (m === 0 && hoje.getDate() < nascimento.getDate())) {
+      idade--;
+    }
 
-        // Filter operators text
-        filterOperatorContains: 'Contém',
+    return `${idade} anos`;
+  };
 
-        // Column menu text
-        columnMenuLabel: 'Menu',
-        columnMenuFilter: 'Filtrar',
-        columnMenuUnsort: 'Cancelar ordenação',
-        columnMenuSortAsc: 'Ordenar ascendente',
-        columnMenuSortDesc: 'Ordenar descendente',
+  return (
+    <div className="FrameRelatorio">
+      <h1>Histórico</h1>
+      <input
+        className="CmpData"
+        type="date"
+        value={dataInicio}
+        onChange={(e) => setDataInicio(e.target.value)}
+      />
+      <input
+        className="CmpData"
+        type="date"
+        value={dataFim}
+        onChange={(e) => setDataFim(e.target.value)}
+      />
 
-    };
+      <button className="BotaoBuscar" onClick={buscarRegistros}>
+        Buscar
+      </button>
 
-    const exportarParaExcel = () => {
-        const ws = XLSX.utils.json_to_sheet(registros);
-        const wb = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(wb, ws, 'Registros');
-        XLSX.writeFile(wb, 'relatorio.xlsx');
-    };
-
-    return (
-        <div style={{ padding: '20px' }}>
-            <h2>Relatórios</h2>
-            <Box sx={{ display: 'flex', gap: 2 }}>
-                <TextField
-                    type="date"
-                    value={dataInicio}
-                    onChange={(e) => setDataInicio(e.target.value)}
-                    variant="outlined"
-                    size="small"
-                />
-                <TextField
-                    type="date"
-                    value={dataFim}
-                    onChange={(e) => setDataFim(e.target.value)}
-                    variant="outlined"
-                    size="small"
-                />
-                <Button variant="contained" onClick={buscarPorPeriodo} style={{ marginTop: '20px'}}>
-                    Buscar
-                </Button>
-            </Box>    
-
-            <Button variant="contained" onClick={exportarParaExcel} style={{ marginTop: '20px' }}>
-                Exportar para Excel
-            </Button>
-
-            <div style={{ height: 400, width: '100%', marginTop: '20px' }}>
-                <DataGrid
-                    pagination={false}
-                    hideFooter
-                    rows={registros}
-                    columns={[
-                        { field: 'nomepaciente', headerName: 'Nome', width: 150, filterOperators: onlyContainsOperator },
-                        { field: 'sexo', headerName: 'Sexo', width: 100, filterOperators: onlyContainsOperator },
-                        { field: 'datanascimento', headerName: 'Data Nasc.', width: 130, filterOperators: onlyContainsOperator, renderCell: (params) => <span>{formatarData(params.value)}</span> },
-                        { field: 'exame', headerName: 'Exame', width: 130, filterOperators: onlyContainsOperator },
-                        { field: 'qtdincidencias', headerName: 'Incid.', width: 60, filterOperators: onlyContainsOperator },
-                        { field: 'origem', headerName: 'Origem', width: 120, filterOperators: onlyContainsOperator },
-                        { field: 'reexposicao', headerName: 'Reexposição', width: 150, filterOperators: onlyContainsOperator },
-                        { field: 'motivo', headerName: 'Motivo', width: 150, filterOperators: onlyContainsOperator },
-                        { field: 'datapedido', headerName: 'Data Realizada', width: 130, filterOperators: onlyContainsOperator, renderCell: (params) => <span>{formatarData(params.value)}</span>},
-                        { field: 'horapedido', headerName: 'Hora Pedido', width: 130, filterOperators: onlyContainsOperator },
-                        { field: 'horarealizada', headerName: 'Hora Realizada', width: 130, filterOperators: onlyContainsOperator },
-                        { field: 'nometecnico', headerName: 'Técnico', width: 130, filterOperators: onlyContainsOperator },
-                    ]}
-                    localeText={localeTextPTBR}
-                    pageSize={5}
-                    rowsPerPageOptions={[5]}
-                    checkboxSelection
-                    disableColumnSelector
-                />
-            </div>
+      <div>
+        <div className="LinhaRelatorio">
+          <span className="SpanNome">Nome</span>
+          <span className="SpanSexo">Sexo</span>
+          <div className="Coluna1">
+            <span className="linha1">Data</span>
+            <span>Nascimento</span>
+          </div>
+          <span className="SpanIdade">Idade</span>
+          <span className="SpanExame">Exame</span>
+          <span className="SpanInci">Incid.</span>
+          <span className="SpanOrigem">Origem</span>
+          <span className="SpanReexpo">Reexpo.</span>
+          <span className="SpanMotivo">Motivo</span>
+          <div className="Coluna2">
+            <span className="linha1">Data</span>
+            <span>Realização</span>
+          </div>
+          <div className="Coluna3">
+            <span className="linha1">Hora</span>
+            <span>Solicitção</span>
+          </div>
+          <div className="Coluna4">
+            <span className="linha1">Hora</span>
+            <span>Realizada</span>
+          </div>
+          <span>Técnico</span>
         </div>
-    );
+        <table cellPadding="3" cellSpacing="0" className="TabelaHistorico">
+          <tbody>
+            {registros.map((item, index) => (
+              <tr key={item.id}>
+                <td>{item.nomepaciente}</td>
+                <td>{item.sexo}</td>
+                <td>{formatarData(item.datanascimento)}</td>
+                <td>{calcularIdade(item.datanascimento)}</td>
+                <td>{item.exame}</td>
+                <td>{item.qtdincidencias}</td>
+                <td>{item.origem}</td>
+                <td>{item.reexposicao}</td>
+                <td>{item.motivo}</td>
+                <td>{formatarData(item.datarealizada)}</td>
+                <td>{item.horapedido}</td>
+                <td>{item.horarealizada}</td>
+                <td>{item.nometecnico}</td>
+                <td>
+                  <button
+                    onClick={() => excluirRegistro(item.id)}
+                    className="BotaoExcluir"
+                  >
+                    <Trash2 className="icon" />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
 };
 
-export default Relatorios;
+export default Historico;

@@ -1,279 +1,132 @@
-/* Cabeçalho da aba Registros*/
-.LinhaRegistro {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
+input {
+  height: 25px;
 }
 
-.LinhaRegistro .Coluna1{
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    margin-right: 20px;
+select {
+  height: 30px;
 }
-.LinhaRegistro .Coluna2{
+
+.CmpProntuario {
+  width: 90px;
+  border-radius: 5px;
+  border: 1px solid grey;
+  margin: 5px;
+}
+
+.CmpNome {
+  width: 215px;
+  border-radius: 5px;
+  border: 1px solid grey;
+  margin-right: 5px;
+}
+
+.CmpSexo {
+  width: 40px;
+  border-radius: 5px;
+  border: 1px solid grey;
+  margin-right: 5px;
+}
+
+.CmpData {
+  width: 100px;
+  height: 27px;
+  border-radius: 5px;
+  border: 1px solid grey;
+  margin-right: 5px;
+}
+
+.CmpExame {
+  width: 80px;
+  border-radius: 5px;
+  border: 1px solid grey;
+  margin-right: 5px;
+}
+
+.CmpInci {
+  width: 30px;
+  border-radius: 5px;
+  border: 1px solid grey;
+  margin-right: 5px;
+}
+
+.CmpOrigem {
+  width: 90px;
+  border-radius: 5px;
+  border: 1px solid grey;
+  margin-right: 5px;
+}
+
+.CmpReexp {
+  width: 40px;
+  border-radius: 5px;
+  border: 1px solid grey;
+  margin-right: 5px;
+}
+
+.CmpMotivo {
+  width: 160px;
+  border-radius: 5px;
+  border: 1px solid grey;
+  margin-right: 5px;
+}
+
+.CmpHora {
+  width: 70px;
+  height: 27px;
+  border-radius: 5px;
+  border: 1px solid grey;
+  margin-right: 5px;
+}
+
+.CmpTecnico {
+  width: 150px;
+  border-radius: 5px;
+  border: 1px solid grey;
+}
+
+.BotaoDireita {
   display: flex;
-  flex-direction: column;
-  text-align: center;
-  margin-right: 12px;
-}
-.LinhaRegistro .Coluna3{
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-}
-.LinhaRegistro .Coluna4{
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  margin-right: 30px;
+  justify-content: flex-end;
 }
 
-.LinhaRegistro .linha1{
-  margin-bottom: -8px;
+.BotaoBuscar {
+  color: #ffffff;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  background-color: #4c6ef5;
+  border-radius: 15px;
+  border: none;
+  padding: 5px 15px;
+  margin: 5px 5px 5px 0px;
+  height: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.LinhaRegistro span{
-  margin-right: 10px;
+.BotaoBuscar:hover {
+  background-color: #293c88;
 }
 
-.LinhaRegistro .SpanNome{
-  margin-right: 180px;
-}
-.LinhaRegistro .SpanSexo{
-  margin-right: 20px;
-}
-.LinhaRegistro .SpanExame{
-  margin-right: 20px;
-}
-.LinhaRegistro .SpanInci{
-  margin-right: 15px;
-}
-.LinhaRegistro .SpanOrigem{
-  margin-right: 25px;
-}
-.LinhaRegistro .SpanReexpo{
-  margin-right: 60px;
-}
-.LinhaRegistro .SpanMotivo{
-  margin-right: 75px;
+.BotaoExportar {
+  color: #ffffff;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  background-color: #4c6ef5;
+  border-radius: 15px;
+  border: none;
+  padding: 5px 15px;
+  margin: 5px 5px 5px 0px;
+  height: 30px;
+  transition: background-color 0.3s ease;
 }
 
-input{
-    height: 25px;
-  }
-  
-  select{
-    height: 30px;
-  }
-  
-  .CmpProntuario{
-    width: 90px;
-    border-radius: 5px;
-    border: 1px solid grey;
-    margin: 5px;
-  }
-  
-  .CmpNome{
-    width: 215px;
-    border-radius: 5px;
-    border: 1px solid grey;
-    margin-right: 5px;
-  }
-  
-  .CmpSexo{
-    width: 40px;
-    border-radius: 5px;
-    border: 1px solid grey;
-    margin-right: 5px;
-  }
-  
-  .CmpData{
-    width: 100px;
-    height: 27px;
-    border-radius: 5px;
-    border: 1px solid grey;
-    margin-right: 5px;
-  }
-  
-  .CmpExame{
-    width: 80px;
-    border-radius: 5px;
-    border: 1px solid grey;
-    margin-right: 5px;
-  }
-  
-  .CmpInci{
-    width: 30px;
-    border-radius: 5px;
-    border: 1px solid grey;
-    margin-right: 5px;
-  }
-  
-  .CmpOrigem{
-    width: 90px;
-    border-radius: 5px;
-    border: 1px solid grey;
-    margin-right: 5px;
-  }
-  
-  .CmpReexp{
-    width: 40px;
-    border-radius: 5px;
-    border: 1px solid grey;
-    margin-right: 5px;
-  }
-  
-  .CmpMotivo{
-    width: 160px;
-    border-radius: 5px;
-    border: 1px solid grey;
-    margin-right: 5px;
-  }
-  
-  .CmpHora{
-    width: 70px;
-    height: 27px;
-    border-radius: 5px;
-    border: 1px solid grey;
-    margin-right: 5px;
-  }
-  
-  .CmpTecnico{
-    width: 150px;
-    border-radius: 5px;
-    border: 1px solid grey;
-  }
-  
-  .BotaoRegistrar{
-    color: #FFFFFF;
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    background-color: #4c6ef5;
-    border-radius: 15px;
-    border: none;
-    padding: 2px 15px;
-    margin-top: 5px;
-    width: 120px;
-    height: 25px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .BotaoRegistrar:hover{
-    background-color: #293c88;
-  }
-
-  .BotaoDireita{
-    display: flex;
-    justify-content: flex-end;
-  }
-  
-  .BotaoBuscar {
-    color: #FFFFFF;
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    background-color: #4C6EF5;
-    border-radius: 15px;
-    border: none;
-    padding: 5px 15px;
-    margin: 5px 5px 5px 0px;
-    height: 30px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-
-  .BotaoBuscar:hover {
-    background-color: #293c88;
-  }
-
-  .BotaoExportar {
-    color: #e7e7e7;
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    background-color: #4C6EF5;
-    border-radius: 15px;
-    border: none;
-    padding: 5px 15px;
-    margin: 5px 5px 5px 0px;
-    height: 30px;
-    transition: background-color 0.3s ease;
-  }
-
-  .BotaoExportar:hover {
-    cursor: pointer;
-    background-color: #293c88;
-  }
-
-  .BotaoExportar:disabled {
-    cursor: auto;
-    background-color: #7d7d7e;
-  }
-
-  /* Cabeçalho da aba Relatórios */
-.LinhaRelatorio {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
+.BotaoExportar:hover {
+  cursor: pointer;
+  background-color: #293c88;
 }
 
-.LinhaRelatorio .Coluna1{
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    margin-right: 10px;
-}
-.LinhaRelatorio .Coluna2{
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  margin-right: 12px;
-}
-.LinhaRelatorio .Coluna3{
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-}
-.LinhaRelatorio .Coluna4{
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  margin-right: 30px;
-}
-
-.LinhaRelatorio .linha1{
-  margin-bottom: -8px;
-}
-.LinhaRelatorio span{
-  margin-right: 10px;
-}
-.LinhaRelatorio .SpanNome{
-  margin-right: 165px;
-}
-
-.LinhaRelatorio .SpanSexo{
-  margin-right: 15px;
-}
-
-.LinhaRelatorio .SpanIdade{
-  margin-right: 30px;
-}
-.LinhaRelatorio .SpanExame{
-  margin-right: 15px;
-}
-.LinhaRelatorio .SpanInci{
-  margin-right: 15px;
-}
-.LinhaRelatorio .SpanOrigem{
-  margin-right: 20px;
-}
-.LinhaRelatorio .SpanReexpo{
-  margin-right: 65px;
-}
-.LinhaRelatorio .SpanMotivo{
-  margin-right: 85px;
+.BotaoExportar:disabled {
+  color: #e7e7e7;
+  cursor: auto;
+  background-color: #7d7d7e;
 }

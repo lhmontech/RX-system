@@ -1,9 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import './components/tabela.css'
-import './components/formulario.css'
-import './components/navbar.css'
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 

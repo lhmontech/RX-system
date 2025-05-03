@@ -30,6 +30,7 @@ const Relatorio = () =>{
       setRegistros(response.data);
     } catch (error) {
       console.error("Erro ao buscar registros:", error);
+      alert("Erro ao buscar registros");
     }
   };
 
@@ -122,7 +123,6 @@ const Relatorio = () =>{
       </button>
 
       <div>
-        <h3>Resultados:</h3>
         <div className="LinhaRelatorio">
           <span className="SpanNome">Nome</span>
           <span className="SpanSexo">Sexo</span>

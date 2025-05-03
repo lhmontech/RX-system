@@ -1,0 +1,65 @@
+/* Cabeçalho da aba Relatórios */
+ .LinhaRelatorio {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
+
+.LinhaRelatorio .Coluna1{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-right: 10px;
+}
+.LinhaRelatorio .Coluna2{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-right: 12px;
+}
+.LinhaRelatorio .Coluna3{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.LinhaRelatorio .Coluna4{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-right: 30px;
+}
+
+.LinhaRelatorio .linha1{
+  margin-bottom: -8px;
+}
+.LinhaRelatorio span{
+  margin-right: 10px;
+}
+.LinhaRelatorio .SpanNome{
+  margin-right: 165px;
+}
+
+.LinhaRelatorio .SpanSexo{
+  margin-right: 15px;
+}
+
+.LinhaRelatorio .SpanIdade{
+  margin-right: 30px;
+}
+.LinhaRelatorio .SpanExame{
+  margin-right: 15px;
+}
+.LinhaRelatorio .SpanInci{
+  margin-right: 15px;
+}
+.LinhaRelatorio .SpanOrigem{
+  margin-right: 20px;
+}
+.LinhaRelatorio .SpanReexpo{
+  margin-right: 65px;
+}
+.LinhaRelatorio .SpanMotivo{
+  margin-right: 85px;
+}

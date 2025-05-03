@@ -3,6 +3,8 @@ import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
 import Registro from './pages/registro';
 import Relatorio from './pages/relatorio';
+import Historico from './pages/historico';
+import { FolderPen, FolderKanban, FolderSearch, Radiation } from 'lucide-react';
 
 function App() {
   const location = useLocation();
@@ -10,22 +12,22 @@ function App() {
   return (
       <div className="app-container">
         <nav className="navbar">
-        <img src="images/radiation.png" className="Logo" />
+        <Radiation size={36} className="Logo" />
         <div className="tooltip">
-          <Link to="/registro" className={currentPath === '/registro' ? 'active-link' : ''}>
-            <img 
-              src={currentPath === '/registro' ? '/images/folder-pen-active.png' : '/images/folder-pen.png'} 
-              alt="ícone de registro" 
-            />
-            <span className="tooltipText">Registro</span>
+          <Link to="/registro" className={currentPath === '/registro' ? 'active-link' : 'link'}>
+            <FolderPen />    
           </Link>
+          <span className="tooltipText">Registro</span>
         </div>
         <div className="tooltip">
-          <Link to="/relatorio" className={currentPath === '/relatorio' ? 'active-link' : ''}>
-            <img 
-              src={currentPath === '/relatorio' ? '/images/folder-kanban-active.png' : '/images/folder-kanban.png'} 
-              alt="ícone de relatório" 
-            />
+          <Link to="/historico" className={currentPath === '/historico' ? 'active-link' : 'link'}>
+            <FolderSearch />
+          </Link>
+          <span className="tooltipText">Histórico</span>
+        </div>
+        <div className="tooltip">
+          <Link to="/relatorio" className={currentPath === '/relatorio' ? 'active-link' : 'link'}>
+            <FolderKanban />
           </Link>
           <span className="tooltipText">Relatório</span>
         </div>
@@ -33,6 +35,7 @@ function App() {
         <div className="FramePrincipal">
         <Routes>
           <Route path="/registro" element={<Registro />} />
+          <Route path="/historico" element={<Historico />} />
           <Route path="/relatorio" element={<Relatorio />} />
           <Route path="*" element={<Registro />} />
         </Routes>

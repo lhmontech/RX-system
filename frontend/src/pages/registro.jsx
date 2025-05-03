@@ -19,7 +19,7 @@ const Registro = () => {
     nometecnico: ''
   });
   
-  const [mensagem, setMensagem] = useState('');
+  const setMensagem = useState('');
   const [registros, setRegistros] = useState([]); // Armazenando os registros para exibir na tabela
 
   const handleChange = (e) => {
@@ -33,7 +33,6 @@ const Registro = () => {
     try {
       const response = await axios.post('http://localhost:3001/api/registros', formData);
       await atualizarRegistros(); // Atualiza a tabela
-      setMensagem(response.data.message || 'Registro salvo com sucesso!');
       setFormData({
         prontuario: '',
         nomepaciente: '',
@@ -98,6 +97,7 @@ const Registro = () => {
       }
     } catch (erro) {
       console.error('Erro ao excluir:', erro);
+      alert("Erro ao excluir o registro");
     }
   };
   const formatarData = (isoString) => {
@@ -198,11 +198,10 @@ const Registro = () => {
         <input name="horapedido" className="CmpHora" type="time" value={formData.horapedido} onChange={handleChange} required />
         <input name="horarealizada" className="CmpHora" type="time" value={formData.horarealizada} onChange={handleChange} required />
         <input name="nometecnico" className="CmpTecnico" placeholder="Nome do Técnico" value={formData.nometecnico} onChange={handleChange} required />
-        <div className="BotaoDireita"><button type="submit" className="BotaoRegistrar">Registrar</button></div>
-        
+        <div className="BotaoDireita">
+        <button type="submit" className="BotaoRegistrar">Registrar</button></div>        
       </form>
-
-    {registros.length > 0 ? (
+      {registros.length > 0 ? (
       <table cellPadding="3" cellSpacing="0" className="TabelaRegistro">
         <tbody>
           {registros.map((item) => (
@@ -220,9 +219,9 @@ const Registro = () => {
               <td>{item.horarealizada}</td>
               <td>{item.nometecnico}</td>
               <td>
-              <button onClick={() => excluirRegistro(item.id)} className="BotaoExcluir">
-                <Trash2 className="icon"/>
-              </button>
+                <button onClick={() => excluirRegistro(item.id)} className="BotaoExcluir">
+                  <Trash2 className="icon"/>
+                </button>
               </td>
             </tr>
           ))}

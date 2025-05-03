@@ -6,7 +6,7 @@
   padding: 5px;
   border-bottom-left-radius: 15px;
   border-top-left-radius: 15px;
-  border-right: 1px solid #99949e;
+  border-right: 1px solid #a6a0aa;
 }
   
   .navbar a {
@@ -17,19 +17,25 @@
 }
 
 .Logo {
-  margin-top: 10px;
+  color: #454547;
+  margin-top: 5px;
   margin-bottom: 20px;
 }
 
-.active-link{
+.active-link {
   background-color: #4c6ef5;
+  color: #eff2ff;
   border-radius: 10px;
-  padding: 5px 5px 0 5px;
   transition: all 0.5s ease;
 }
 
-img {
-  width: 30px;
+.link {
+  color: #000000;
+  transition: all 0.3s ease;
+}
+
+.link:hover {
+  color: #454547;
 }
 
 .tooltip {
