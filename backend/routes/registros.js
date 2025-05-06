@@ -1,25 +1,26 @@
 const express = require("express");
 const router = express.Router();
-const { connection, connectPacientes } = require("../database");
+const { connection, connectPacientes, sql } = require("../database");
 
 //Rota para buscar registros através do prontuário - Método GET
-router.get("/prontuario/:id", (req, res) => {
+router.get('/prontuario/:id', async (req, res) => {
   const { id } = req.params;
 
-  const query = `SELECT * FROM szpaciente WHERE prontuario = ? LIMIT 1`;
+  try {
+    const pool = await connectPacientes();
+    const result = await pool.request()
+      .input('prontuario', sql.VarChar, id) 
+      .query('SELECT * FROM szpaciente WHERE prontuario = @prontuario');
 
-  connectPacientes.query(query, [id], (err, results) => {
-    if (err) {
-      console.error('Erro ao executar a query:', err); // <- Veja o terminal
-      return res.status(500).json({ error: "Erro no banco de dados", detalhes: err.message });
+    if (result.recordset.length === 0) {
+      return res.status(404).json({ message: 'Prontuário não encontrado' });
     }
 
-    if (results.length === 0) {
-      return res.status(404).json({ message: "Prontuário não encontrado" });
-    }
-
-    res.json(results[0]);
-  });
+    res.json(result.recordset[0]);
+  } catch (err) {
+    console.error('Erro ao buscar prontuário:', err);
+    res.status(500).json({ error: 'Erro no banco de dados' });
+  }
 });
 
 //Rota para inclusão de dados - Método POST
@@ -141,6 +142,66 @@ router.get("/filtro", (req, res) => {
     }
   });
 });
+
+//Rota para editar um registro - Método PUT
+app.put('/:id', async (req, res) => {
+  const { id } = req.params;
+  const {
+    nomepaciente,
+    sexo,
+    datanascimento,
+    exame,
+    qtdincidencias,
+    origem,
+    reexposicao,
+    motivo,
+    datarealizada,
+    horapedido,
+    horarealizada,
+    nometecnico
+  } = req.body;
+
+  try {
+    await db.query(
+      `UPDATE registros SET 
+        nomepaciente = ?, 
+        sexo = ?, 
+        datanascimento = ?, 
+        exame = ?, 
+        qtdincidencias = ?, 
+        origem = ?, 
+        reexposicao = ?, 
+        motivo = ?, 
+        datarealizada = ?, 
+        horapedido = ?, 
+        horarealizada = ?, 
+        nometecnico = ?
+      WHERE id = ?`,
+      [
+        nomepaciente,
+        sexo,
+        datanascimento,
+        exame,
+        qtdincidencias,
+        origem,
+        reexposicao,
+        motivo,
+        datarealizada,
+        horapedido,
+        horarealizada,
+        nometecnico,
+        id
+      ]
+    );
+
+    res.sendStatus(200);
+  } catch (error) {
+    console.error('Erro ao atualizar registro:', error);
+    res.status(500).send('Erro ao atualizar registro');
+  }
+});
+
+
 
 //Rota para deletar um registro - Método DELETE
 router.delete("/:id", (req, res) => {

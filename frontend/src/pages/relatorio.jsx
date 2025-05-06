@@ -26,7 +26,7 @@ const Relatorio = () =>{
       if (idadeInicio) params.append("idadeInicio", idadeInicio);
       if (idadeFim) params.append("idadeFim", idadeFim);
         
-      const response = await axios.get(`http://localhost:3001/api/registros/filtro?${params.toString()}`);
+      const response = await axios.get(`http://192.168.150.82:3001/api/registros/filtro?${params.toString()}`);
       setRegistros(response.data);
     } catch (error) {
       console.error("Erro ao buscar registros:", error);

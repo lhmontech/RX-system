@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Trash2 } from 'lucide-react';
+import { Trash2, SquarePen } from 'lucide-react';
 
 const Registro = () => {
-  const [formData, setFormData] = useState({
+  const dataHoje = new Date().toISOString().slice(0, 10);
+  const initialFormData = {
     prontuario: '',
     nomepaciente: '',
     sexo: '',
@@ -13,11 +14,12 @@ const Registro = () => {
     origem: '',
     reexposicao: '',
     motivo: '',
-    datarealizada: '',
+    datarealizada: dataHoje,
     horapedido: '',
     horarealizada: '',
     nometecnico: ''
-  });
+  };
+  const [formData, setFormData] = useState(initialFormData);
   
   const setMensagem = useState('');
   const [registros, setRegistros] = useState([]); // Armazenando os registros para exibir na tabela
@@ -33,21 +35,7 @@ const Registro = () => {
     try {
       const response = await axios.post('http://localhost:3001/api/registros', formData);
       await atualizarRegistros(); // Atualiza a tabela
-      setFormData({
-        prontuario: '',
-        nomepaciente: '',
-        sexo: '',
-        datanascimento: '',
-        exame: '',
-        qtdincidencias: '',
-        origem: '',
-        reexposicao: '',
-        motivo: '',
-        datarealizada: '',
-        horapedido: '',
-        horarealizada: '',
-        nometecnico: ''
-      });
+      setFormData(initialFormData);
     } catch (error) {
       console.error('Erro ao registrar:', error);
       setMensagem('Erro ao registrar. Tente novamente.');
@@ -56,7 +44,7 @@ const Registro = () => {
   //Tabela com a busca dos registros mais recentes
   const atualizarRegistros = async () => {
     try {
-      const res = await axios.get('http://localhost:3001/api/registros');
+      const res = await axios.get('http://192.168.150.82:3001/api/registros');
       const ultimosRegistros = res.data.slice(0, 20); // Últimos 20 registros
       setRegistros(ultimosRegistros);
     } catch (err) {
@@ -72,13 +60,15 @@ const Registro = () => {
   const buscarProntuario = async () => {
     if (!formData.prontuario) return;
     try {
-      const response = await axios.get(`http://localhost:3001/api/registros/prontuario/${formData.prontuario}`);
+      const response = await axios.get(`http://192.168.150.82:3001/api/registros/prontuario/${formData.prontuario}`);
+      console.log("Resposta da API:", response.data);
       const data = response.data;
+      const paciente = Array.isArray(data) ? data[0] : data;
       setFormData(prev => ({
         ...prev,
-        nomepaciente: data.nome,
-        sexo: data.sexo,
-        datanascimento: data.datanascimento.slice(0, 10),
+        nomepaciente: paciente.NOMEPACIENTE?.trim() ?? '',
+        sexo: paciente.SEXO ?? '',
+        datanascimento: paciente.DATANASC?.slice(0, 10) ?? ''
       }));
     } catch (err) {
       console.error(err);
@@ -91,7 +81,7 @@ const Registro = () => {
     if (!confirmar) return;
   
     try {
-      const resposta = await axios.delete(`http://localhost:3001/api/registros/${id}`);
+      const resposta = await axios.delete(`http://192.168.150.82:3001/api/registros/${id}`);
       if (resposta.status === 200) {
         await atualizarRegistros();
       }
@@ -199,7 +189,13 @@ const Registro = () => {
         <input name="horarealizada" className="CmpHora" type="time" value={formData.horarealizada} onChange={handleChange} required />
         <input name="nometecnico" className="CmpTecnico" placeholder="Nome do Técnico" value={formData.nometecnico} onChange={handleChange} required />
         <div className="BotaoDireita">
-        <button type="submit" className="BotaoRegistrar">Registrar</button></div>        
+          <button type="button" className="BotaoLimpar" onClick={() => setFormData(initialFormData)}>
+            Limpar
+          </button>
+          <button type="submit" className="BotaoRegistrar">
+            Registrar
+          </button>
+        </div>      
       </form>
       {registros.length > 0 ? (
       <table cellPadding="3" cellSpacing="0" className="TabelaRegistro">
@@ -218,6 +214,11 @@ const Registro = () => {
               <td>{item.horapedido}</td>
               <td>{item.horarealizada}</td>
               <td>{item.nometecnico}</td>
+              <td>
+                <button onClick={() => excluirRegistro(item.id)} className="BotaoExcluir">
+                <SquarePen className="icon"/>
+                </button>
+              </td>
               <td>
                 <button onClick={() => excluirRegistro(item.id)} className="BotaoExcluir">
                   <Trash2 className="icon"/>

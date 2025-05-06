@@ -21,6 +21,7 @@
 }
 
 .LinhaRegistro span {
+  margin-right: 10px;
 }
 
 /* Se quiser alinhar os textos das spans da mesma linha */
@@ -29,7 +30,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
 
 .BotaoRegistrar{
     color: #FFFFFF;
@@ -48,4 +48,24 @@
   
   .BotaoRegistrar:hover{
     background-color: #293c88;
+  }
+
+  .BotaoLimpar{
+    color: #FFFFFF;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    background-color: #f54c4c;
+    border-radius: 15px;
+    border: none;
+    padding: 2px 15px;
+    margin-top: 5px;
+    margin-right: 5px;
+    width: 120px;
+    height: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .BotaoLimpar:hover{
+    background-color: #882929;
   }
