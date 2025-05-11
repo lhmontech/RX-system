@@ -6,6 +6,9 @@
 @import 'components/tabelaHistorico.css';
 @import 'components/formularioRegistro.css';
 @import 'components/formularioRelatorio.css';
+@import 'components/cabecalhoRegistro.css';
+@import 'components/cabecalhoHistorico.css';
+@import 'components/cabecalhoRelatorio.css';
 
 body {
   font-family: 'Poppins', sans-serif;

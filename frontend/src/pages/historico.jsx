@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Trash2 } from "lucide-react";
+import { Trash2, SquarePen } from "lucide-react";
 
 const Historico = () => {
   const [dataInicio, setDataInicio] = useState("");
@@ -15,7 +15,7 @@ const Historico = () => {
       if (dataFim) params.append("dataFim", dataFim);
 
       const response = await axios.get(
-        `http://localhost:3001/api/registros/filtro?${params.toString()}`
+        `http://192.168.150.82:3001/api/registros/filtro?${params.toString()}`
       );
       setRegistros(response.data);
     } catch (error) {
@@ -32,7 +32,7 @@ const Historico = () => {
 
     try {
       const resposta = await axios.delete(
-        `http://localhost:3001/api/registros/${id}`
+        `http://192.168.150.82:3001/api/registros/${id}`
       );
       if (resposta.status === 200) {
         await buscarRegistros();
@@ -66,13 +66,13 @@ const Historico = () => {
     <div className="FrameRelatorio">
       <h1>Histórico</h1>
       <input
-        className="CmpData"
+        className="CmpDataHistorico"
         type="date"
         value={dataInicio}
         onChange={(e) => setDataInicio(e.target.value)}
       />
       <input
-        className="CmpData"
+        className="CmpDataHistorico"
         type="date"
         value={dataFim}
         onChange={(e) => setDataFim(e.target.value)}
@@ -83,33 +83,35 @@ const Historico = () => {
       </button>
 
       <div>
-        <div className="LinhaRelatorio">
-          <span className="SpanNome">Nome</span>
-          <span className="SpanSexo">Sexo</span>
-          <div className="Coluna1">
-            <span className="linha1">Data</span>
-            <span>Nascimento</span>
-          </div>
-          <span className="SpanIdade">Idade</span>
-          <span className="SpanExame">Exame</span>
-          <span className="SpanInci">Incid.</span>
-          <span className="SpanOrigem">Origem</span>
-          <span className="SpanReexpo">Reexpo.</span>
-          <span className="SpanMotivo">Motivo</span>
-          <div className="Coluna2">
-            <span className="linha1">Data</span>
-            <span>Realização</span>
-          </div>
-          <div className="Coluna3">
-            <span className="linha1">Hora</span>
-            <span>Solicitção</span>
-          </div>
-          <div className="Coluna4">
-            <span className="linha1">Hora</span>
-            <span>Realizada</span>
-          </div>
-          <span>Técnico</span>
-        </div>
+      <table className="CabecalhoHistorico">
+          <tr>
+            <td>Nome</td>
+            <td>Sexo</td>
+            <td>
+              <div className="linha1">Data</div>
+              <div>Nascimento</div>
+            </td>
+            <td>Idade</td>
+            <td>Exame</td>
+            <td>Incid.</td>
+            <td>Origem</td>
+            <td>Reexpo.</td>
+            <td>Motivo</td>
+            <td>
+              <div className="linha1">Data</div>
+              <div>Realização</div>
+            </td>
+            <td>
+              <div className="linha1">Hora</div>
+              <div>Solicit.</div>
+            </td>
+            <td>
+              <div className="linha1">Hora</div>
+              <div>Realizada</div>
+            </td>
+            <td>Técnico</td>
+          </tr>       
+        </table>
         <table cellPadding="3" cellSpacing="0" className="TabelaHistorico">
           <tbody>
             {registros.map((item, index) => (
@@ -128,11 +130,8 @@ const Historico = () => {
                 <td>{item.horarealizada}</td>
                 <td>{item.nometecnico}</td>
                 <td>
-                  <button
-                    onClick={() => excluirRegistro(item.id)}
-                    className="BotaoExcluir"
-                  >
-                    <Trash2 className="icon" />
+                  <button onClick={() => excluirRegistro(item.id)} className="BotaoExcluir">
+                    <Trash2 className="icon"/>
                   </button>
                 </td>
               </tr>

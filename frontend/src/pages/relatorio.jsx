@@ -72,10 +72,9 @@ const Relatorio = () =>{
   return (
     <div className="FrameRelatorio">
       <h1>Relatórios</h1>
-      <input className="CmpData" type="date" value={dataInicio} onChange={(e) => setDataInicio(e.target.value)}/>
-      <input className="CmpData" type="date" value={dataFim} onChange={(e) => setDataFim(e.target.value)}/>
-      
-      <select name="exame" className="CmpOrigem" placeholder="Tipo de exame" value={exame} onChange={(e) => setExame(e.target.value)}>
+      <input className="CmpDataRelatorio" type="date" value={dataInicio} onChange={(e) => setDataInicio(e.target.value)}/>
+      <input className="CmpDataRelatorio" type="date" value={dataFim} onChange={(e) => setDataFim(e.target.value)}/>
+      <select name="exame" className="CmpExameRelatorio" placeholder="Tipo de exame" value={exame} onChange={(e) => setExame(e.target.value)}>
           <option value="">Exame</option>
           <option value="Crânio">Crânio</option>
           <option value="Mandibula">Mandibula</option>
@@ -107,14 +106,14 @@ const Relatorio = () =>{
           <option value="Pé">Pé</option>
           <option value="Calcâneo">Calacâneo</option>
       </select>
-      <select name="sexo" className="CmpOrigem" value={sexo} onChange={(e) => setSexo(e.target.value)}>
+      <select name="sexo" className="CmpSexoRelatorio" value={sexo} onChange={(e) => setSexo(e.target.value)}>
           <option value="">Sexo</option>
           <option value="M">M</option>
           <option value="F">F</option>
       </select>
-      <input className="CmpNome" type="text" placeholder="Origem" value={origem} onChange={(e) => setOrigem(e.target.value)}/>
-      <input className="CmpOrigem" type="number" placeholder="Idade inicial" value={idadeInicio} onChange={(e) => setIdadeInicio(e.target.value)}/>
-      <input className="CmpOrigem" type="number" placeholder="Idade final" value={idadeFim} onChange={(e) => setIdadeFim(e.target.value)}/>
+      <input className="CmpOrigemRelatorio" type="text" placeholder="Origem" value={origem} onChange={(e) => setOrigem(e.target.value)}/>
+      <input className="CmpIdade" type="number" placeholder="Idade inicial" value={idadeInicio} onChange={(e) => setIdadeInicio(e.target.value)}/>
+      <input className="CmpIdade" type="number" placeholder="Idade final" value={idadeFim} onChange={(e) => setIdadeFim(e.target.value)}/>
       <button className="BotaoBuscar" onClick={buscarRegistros}>
         Buscar
       </button>
@@ -123,33 +122,35 @@ const Relatorio = () =>{
       </button>
 
       <div>
-        <div className="LinhaRelatorio">
-          <span className="SpanNome">Nome</span>
-          <span className="SpanSexo">Sexo</span>
-          <div className="Coluna1">
-            <span className="linha1">Data</span>
-            <span>Nascimento</span>
-          </div>
-          <span className="SpanIdade">Idade</span>         
-          <span className="SpanExame">Exame</span>
-          <span className="SpanInci">Incid.</span>
-          <span className="SpanOrigem">Origem</span>
-          <span className="SpanReexpo">Reexpo.</span>
-          <span className="SpanMotivo">Motivo</span>
-          <div className="Coluna2">
-            <span className="linha1">Data</span>
-            <span>Realização</span>
-          </div>     
-          <div className="Coluna3">
-            <span className="linha1">Hora</span>
-            <span>Solicitção</span>
-          </div>
-          <div className="Coluna4">
-            <span className="linha1">Hora</span>
-            <span>Realizada</span>
-          </div>        
-          <span>Técnico</span>
-        </div>
+        <table className="CabecalhoRelatorio">
+          <tr>
+            <td>Nome</td>
+            <td>Sexo</td>
+            <td>
+              <div className="linha1">Data</div>
+              <div>Nascimento</div>
+            </td>
+            <td>Idade</td>
+            <td>Exame</td>
+            <td>Incid.</td>
+            <td>Origem</td>
+            <td>Reexpo.</td>
+            <td>Motivo</td>
+            <td>
+              <div className="linha1">Data</div>
+              <div>Realização</div>
+            </td>
+            <td>
+              <div className="linha1">Hora</div>
+              <div>Solicit.</div>
+            </td>
+            <td>
+              <div className="linha1">Hora</div>
+              <div>Realizada</div>
+            </td>
+            <td>Técnico</td>
+          </tr>       
+        </table>
         <table cellPadding="3" cellSpacing="0" className="TabelaRelatorio">
           <tbody>
             {registros.map((item, index) => (

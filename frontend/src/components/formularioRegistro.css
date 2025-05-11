@@ -1,34 +1,73 @@
-.LinhaRegistro {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-  display: flex;
-  flex-wrap: wrap; /* quebra em telas menores */
-  gap: 16px;
-  align-items: flex-end;
-  padding: 10px;
+.CamposRegistro{
+  border: none;
 }
 
-.LinhaRegistro > div {
-  display: flex;
-  flex-direction: column;
+.CamposRegistro td:nth-child(1){
+  width: 160px;
+  padding-right: 7px;
+}
+
+.CamposRegistro td:nth-child(2) {
+  width: 40px;
   text-align: center;
-  flex: 1 1 120px; /* flexível, mínimo de 120px */
-  min-width: 120px;
 }
 
-.LinhaRegistro .linha1 {
-  margin-bottom: -8px;
+.CamposRegistro td:nth-child(3) {
+  width: 80px;
+  text-align: center;
+  padding-right: 5px;
 }
 
-.LinhaRegistro span {
-  margin-right: 10px;
+.CamposRegistro td:nth-child(4) {
+  width: 65px;
+  text-align: center;
 }
 
-/* Se quiser alinhar os textos das spans da mesma linha */
-.LinhaRegistro span.title {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.CamposRegistro td:nth-child(5) {
+  width: 25px;
+  text-align: center;
+  padding-right: 7px;
+}
+
+.CamposRegistro td:nth-child(6) {
+  width: 75px;
+  text-align: center;
+}
+
+.CamposRegistro td:nth-child(7) {
+  width: 35px;
+  text-align: center;
+  padding-right: 7px;
+}
+
+.CamposRegistro td:nth-child(8) {
+  width: 130px;
+  text-align: center;
+  padding-right: 7px;
+}
+
+.CamposRegistro td:nth-child(9) {
+  width: 80px;
+  text-align: center;
+  padding-right: 5px;
+}
+
+.CamposRegistro td:nth-child(10) {
+  width: 55px;
+  text-align: center;
+  padding-right: 5px;
+}
+
+.CamposRegistro td:nth-child(11) {
+  width: 55px;
+  text-align: center;
+  padding-right: 5px;
+}
+
+.CamposRegistro td:nth-child(12) {
+  width: 160px;
+  text-align: center;
+  padding-right: 5px;
 }
 
 .BotaoRegistrar{
@@ -54,7 +93,7 @@
     color: #FFFFFF;
     font-family: 'Poppins', sans-serif;
     font-size: 14px;
-    background-color: #f54c4c;
+    background-color: #f06969;
     border-radius: 15px;
     border: none;
     padding: 2px 15px;
@@ -67,5 +106,5 @@
   }
   
   .BotaoLimpar:hover{
-    background-color: #882929;
+    background-color: #aa3030;
   }

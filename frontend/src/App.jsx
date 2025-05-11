@@ -1,6 +1,4 @@
-import React from 'react';
-import { Routes, Route, Link, useLocation } from 'react-router-dom';
-import { Outlet } from 'react-router-dom';
+import { Routes, Route, Link, useLocation, Navigate } from 'react-router-dom';
 import Registro from './pages/registro';
 import Relatorio from './pages/relatorio';
 import Historico from './pages/historico';
@@ -34,12 +32,13 @@ function App() {
         </nav>
         <div className="FramePrincipal">
         <Routes>
+          <Route path="/" element={<Navigate to="/registro" />} />
           <Route path="/registro" element={<Registro />} />
           <Route path="/historico" element={<Historico />} />
           <Route path="/relatorio" element={<Relatorio />} />
           <Route path="*" element={<Registro />} />
+          <Route path="*" element={<Navigate to="/registro" />} />
         </Routes>
-        <Outlet />
         </div>
       </div>
   );

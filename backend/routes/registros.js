@@ -144,7 +144,7 @@ router.get("/filtro", (req, res) => {
 });
 
 //Rota para editar um registro - Método PUT
-app.put('/:id', async (req, res) => {
+router.put('/:id', (req, res) => {
   const { id } = req.params;
   const {
     nomepaciente,
@@ -161,45 +161,46 @@ app.put('/:id', async (req, res) => {
     nometecnico
   } = req.body;
 
-  try {
-    await db.query(
-      `UPDATE registros SET 
-        nomepaciente = ?, 
-        sexo = ?, 
-        datanascimento = ?, 
-        exame = ?, 
-        qtdincidencias = ?, 
-        origem = ?, 
-        reexposicao = ?, 
-        motivo = ?, 
-        datarealizada = ?, 
-        horapedido = ?, 
-        horarealizada = ?, 
-        nometecnico = ?
-      WHERE id = ?`,
-      [
-        nomepaciente,
-        sexo,
-        datanascimento,
-        exame,
-        qtdincidencias,
-        origem,
-        reexposicao,
-        motivo,
-        datarealizada,
-        horapedido,
-        horarealizada,
-        nometecnico,
-        id
-      ]
-    );
+  const query = `
+    UPDATE registros SET 
+      nomepaciente = ?, 
+      sexo = ?, 
+      datanascimento = ?, 
+      exame = ?, 
+      qtdincidencias = ?, 
+      origem = ?, 
+      reexposicao = ?, 
+      motivo = ?, 
+      datarealizada = ?, 
+      horapedido = ?, 
+      horarealizada = ?, 
+      nometecnico = ?
+    WHERE id = ?`;
+
+  connection.query(query, [
+    nomepaciente,
+    sexo,
+    datanascimento,
+    exame,
+    qtdincidencias,
+    origem,
+    reexposicao,
+    motivo,
+    datarealizada,
+    horapedido,
+    horarealizada,
+    nometecnico,
+    id
+  ], (err, results) => {
+    if (err) {
+      console.error('Erro ao atualizar registro:', err);
+      return res.status(500).send('Erro ao atualizar registro');
+    }
 
     res.sendStatus(200);
-  } catch (error) {
-    console.error('Erro ao atualizar registro:', error);
-    res.status(500).send('Erro ao atualizar registro');
-  }
+  });
 });
+  
 
 
 

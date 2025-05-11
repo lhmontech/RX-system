@@ -8,7 +8,9 @@ table{
   overflow: hidden;
 }
 
-td {
+.TabelaRegistro td, 
+.TabelaRelatorio td,
+.TabelaHistorico td {
   border-right: 1px solid gray;
   text-align: left;
 }
@@ -43,3 +45,19 @@ table tbody tr:nth-child(odd) {
   color: #ffe6e6;
   background-color: #f06969;
 }
+
+.BotaoEditar {
+  background: transparent;
+  border: none;
+  border-radius: 2px;
+  color: #3d3d3d;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  transition: background-color 0.3s ease;
+}
+
+.BotaoEditar:hover {
+  color: #ffffff;
+  background-color: #dbd578;
+}
+
