@@ -30,18 +30,19 @@ const Registro = () => {
   };
 
   const handleEdit = (item) => {
-    const dataFormatada = item.datarealizada.split('T')[0];
+    const datarealizadaFormatada = item.datarealizada.split('T')[0];
+    const datanascimentoFormatada = item.datanascimento.split('T')[0];
     setFormData({
       prontuario: item.prontuario,
       nomepaciente: item.nomepaciente,
       sexo: item.sexo,
-      datanascimento: item.datanascimento,
+      datanascimento: datanascimentoFormatada,
       exame: item.exame,
       qtdincidencias: item.qtdincidencias,
       origem: item.origem,
       reexposicao: item.reexposicao,
       motivo: item.motivo,
-      datarealizada: dataFormatada,
+      datarealizada: datarealizadaFormatada,
       horapedido: item.horapedido,
       horarealizada: item.horarealizada,
       nometecnico: item.nometecnico
@@ -57,9 +58,9 @@ const Registro = () => {
 
       if (editandoId) {
         // Atualiza registro existente
-        await axios.put(`http://192.168.150.82:3001/api/registros/${editandoId}`, formData);
+        await axios.put(`http://localhost:3001/api/registros/${editandoId}`, formData);
       } else {
-        await axios.post('http://192.168.150.82:3001/api/registros', formData);
+        await axios.post('http://localhost:3001/api/registros', formData);
       }
       await atualizarRegistros(); // Atualiza a tabela
       setFormData(initialFormData); //Limpa o formulário
@@ -73,7 +74,7 @@ const Registro = () => {
   //Tabela com a busca dos registros mais recentes
   const atualizarRegistros = async () => {
     try {
-      const res = await axios.get('http://192.168.150.82:3001/api/registros');
+      const res = await axios.get('http://localhost:3001/api/registros');
       const ultimosRegistros = res.data.slice(0, 20); // Últimos 20 registros
       setRegistros(ultimosRegistros);
     } catch (err) {
@@ -86,18 +87,17 @@ const Registro = () => {
     atualizarRegistros();
   }, []);
 
+
   const buscarProntuario = async () => {
     if (!formData.prontuario) return;
     try {
-      const response = await axios.get(`http://192.168.150.82:3001/api/registros/prontuario/${formData.prontuario}`);
-      console.log("Resposta da API:", response.data);
+      const response = await axios.get(`http://localhost:3001/api/registros/prontuario/${formData.prontuario}`);
       const data = response.data;
-      const paciente = Array.isArray(data) ? data[0] : data;
       setFormData(prev => ({
         ...prev,
-        nomepaciente: paciente.NOMEPACIENTE?.trim() ?? '',
-        sexo: paciente.SEXO ?? '',
-        datanascimento: paciente.DATANASC?.slice(0, 10) ?? ''
+        nomepaciente: data.nome,
+        sexo: data.sexo,
+        datanascimento: data.datanascimento.slice(0, 10),
       }));
     } catch (err) {
       console.error(err);
@@ -110,7 +110,7 @@ const Registro = () => {
     if (!confirmar) return;
   
     try {
-      const resposta = await axios.delete(`http://192.168.150.82:3001/api/registros/${id}`);
+      const resposta = await axios.delete(`http://localhost:3001/api/registros/${id}`);
       if (resposta.status === 200) {
         await atualizarRegistros();
       }
@@ -210,7 +210,7 @@ const Registro = () => {
                 <option value="Perna">Perna</option>
                 <option value="Tornozelo">Tonozelo</option>
                 <option value="Pé">Pé</option>
-                <option value="Calcâneo">Calacâneo</option>
+                <option value="Calcâneo">Calcâneo</option>
               </select>
             </td>
             <td>

@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: mysql_raiox
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_USER: mestre
+      MYSQL_PASSWORD: 123456
+      MYSQL_DATABASE: bdraiox
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - mysql_data:/var/lib/mysql
+
+  backend:
+    build: ./backend
+    container_name: raiox_backend
+    restart: always
+    ports:
+      - "3001:3001"
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_USER=mestre
+      - DB_PASSWORD=123456
+      - DB_NAME=bdraiox
+      - DB_PORT=3306
+    volumes:
+      - ./backend:/app
+
+  frontend:
+    build: ./frontend
+    container_name: raiox_frontend
+    restart: always
+    stdin_open: true
+    tty: true
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+
+volumes:
+  mysql_data:

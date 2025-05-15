@@ -2,6 +2,9 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
+  "description": "Interface para registro e consulta de atendimentos de pacientes em setor de raio-x",
+  "author": "Lucas Monteiro",
+  "license": "MIT",
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
