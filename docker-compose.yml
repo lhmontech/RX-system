@@ -9,11 +9,10 @@ services:
       MYSQL_ROOT_PASSWORD: 123456
       MYSQL_USER: mestre
       MYSQL_PASSWORD: 123456
-      MYSQL_DATABASE: bdraiox
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
-      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
       - mysql_data:/var/lib/mysql
 
   backend:
@@ -28,8 +27,13 @@ services:
       - DB_HOST=db
       - DB_USER=mestre
       - DB_PASSWORD=123456
-      - DB_NAME=bdraiox
+      - DB_DATABASE=bdraiox
       - DB_PORT=3306
+      - PACIENTES_DB_HOST=db
+      - PACIENTES_DB_USER=mestre
+      - PACIENTES_DB_PASSWORD=123456
+      - PACIENTES_DB_DATABASE=corpore
+      - PACIENTES_DB_PORT=3306
     volumes:
       - ./backend:/app
 
