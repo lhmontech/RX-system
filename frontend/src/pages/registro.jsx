@@ -29,6 +29,7 @@ const Registro = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  //Função para editar um registro
   const handleEdit = (item) => {
     const datarealizadaFormatada = item.datarealizada.split('T')[0];
     const datanascimentoFormatada = item.datanascimento.split('T')[0];
@@ -51,6 +52,7 @@ const Registro = () => {
     setEditandoId(item.id);
   };
 
+  //Função para inserir um novo registro
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -82,12 +84,12 @@ const Registro = () => {
     }
   };
 
-  // Buscar registros ao carregar a pagina e logo após inserir um novo
+  //Busca os registros ao carregar a pagina e logo após inserir um novo
   useEffect(() => {
     atualizarRegistros();
   }, []);
 
-
+  //Função que busca prontuário no banco de pacientes e preenche automáticamente os campos
   const buscarProntuario = async () => {
     if (!formData.prontuario) return;
     try {
@@ -105,6 +107,7 @@ const Registro = () => {
     }
   };
 
+  //Função para excluir dados já registrados
   const excluirRegistro = async (id) => {
     const confirmar = window.confirm('Tem certeza que deseja excluir este registro?');
     if (!confirmar) return;
@@ -119,6 +122,8 @@ const Registro = () => {
       alert("Erro ao excluir o registro");
     }
   };
+
+  //Função para formatar a forma como a data aparece para o usuário
   const formatarData = (isoString) => {
     if (!isoString) return '';
     const data = new Date(isoString);

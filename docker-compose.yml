@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   db:
     image: mysql:8.0
@@ -7,7 +5,7 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: 123456
-      MYSQL_USER: mestre
+      MYSQL_USER: root
       MYSQL_PASSWORD: 123456
     ports:
       - "3307:3306"
@@ -25,12 +23,12 @@ services:
       - db
     environment:
       - DB_HOST=db
-      - DB_USER=mestre
+      - DB_USER=root
       - DB_PASSWORD=123456
       - DB_DATABASE=bdraiox
       - DB_PORT=3306
       - PACIENTES_DB_HOST=db
-      - PACIENTES_DB_USER=mestre
+      - PACIENTES_DB_USER=root
       - PACIENTES_DB_PASSWORD=123456
       - PACIENTES_DB_DATABASE=corpore
       - PACIENTES_DB_PORT=3306

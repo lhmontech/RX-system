@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { connection, connectPacientes} = require("../database");
 
-//Rota para buscar registros através do prontuário - Método GET
+//Rota para buscar registros de um outro banco através do prontuário - Método GET
 router.get("/prontuario/:id", (req, res) => {
   const { id } = req.params;
 
@@ -10,7 +10,7 @@ router.get("/prontuario/:id", (req, res) => {
 
   connectPacientes.query(query, [id], (err, results) => {
     if (err) {
-      console.error('Erro ao executar a query:', err); // <- Veja o terminal
+      console.error('Erro ao executar a query:', err); 
       return res.status(500).json({ error: "Erro no banco de dados", detalhes: err.message });
     }
 
@@ -76,7 +76,7 @@ router.post("/", (req, res) => {
   );
 });
 
-//Rota para buscar os dados - Método GET
+//Rota que faz uma busca e retorna os dados - Método GET
 router.get("/", (req, res) => {
   const query = `
     SELECT * FROM registros
@@ -93,7 +93,7 @@ router.get("/", (req, res) => {
   });
 });
 
-//Rota para fazer consultas mais específicas via GET
+//Rota para fazer busca usando filtros váriados - Método GET
 router.get("/filtro", (req, res) => {
   const { dataInicio, dataFim, exame, sexo, origem, idadeInicio, idadeFim } =
     req.query;

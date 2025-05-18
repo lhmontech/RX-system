@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 app.use('/api/registros', registrosRoutes);
 
-// Teste simples para ver se está funcionando
+// Teste simples para ver se o backend está funcionando
 app.get('/', (req, res) => {
   res.send('API do Raio-X funcionando!');
 });

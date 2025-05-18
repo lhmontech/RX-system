@@ -1,5 +1,5 @@
 CREATE DATABASE IF NOT EXISTS bdraiox;
-USE dbraiox;
+USE bdraiox;
 DROP TABLE IF EXISTS `registros`;
 
 CREATE TABLE `registros` (

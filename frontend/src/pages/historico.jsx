@@ -6,7 +6,8 @@ const Historico = () => {
   const [dataInicio, setDataInicio] = useState("");
   const [dataFim, setDataFim] = useState("");
   const [registros, setRegistros] = useState([]);
-
+  
+  //Função para usar o método GET e filtrar o retorno dos registros por data
   const buscarRegistros = async () => {
     try {
       const params = new URLSearchParams();
@@ -24,6 +25,7 @@ const Historico = () => {
     }
   };
 
+  //Função para excluir dados já registrados
   const excluirRegistro = async (id) => {
     const confirmar = window.confirm(
       "Tem certeza que deseja excluir este registro?"
@@ -43,12 +45,14 @@ const Historico = () => {
     }
   };
 
+  //Função para formatar a forma como a data aparece para o usuário
   const formatarData = (isoString) => {
     if (!isoString) return "";
     const data = new Date(isoString);
     return data.toLocaleDateString("pt-BR");
   };
 
+  //Função para calcular a idade com base na data de nascimento
   const calcularIdade = (dataNasc) => {
     const hoje = new Date();
     const nascimento = new Date(dataNasc);
@@ -63,6 +67,7 @@ const Historico = () => {
   };
 
   return (
+    //Campos para inserir data inicial e final mais botão para iniciar a busca
     <div className="FrameRelatorio">
       <h1>Histórico</h1>
       <input
@@ -81,7 +86,7 @@ const Historico = () => {
       <button className="BotaoBuscar" onClick={buscarRegistros}>
         Buscar
       </button>
-
+      
       <div>
       <table className="CabecalhoHistorico">
           <tr>

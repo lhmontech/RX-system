@@ -13,7 +13,7 @@ const Relatorio = () =>{
   const [idadeInicio, setIdadeInicio] = useState('');
   const [idadeFim, setIdadeFim] = useState('');
 
-
+  //Função em que busca os registros baseado em quais filtros estãso sendo usados
   const buscarRegistros = async () => {
     try {
       const params = new URLSearchParams();
@@ -34,6 +34,7 @@ const Relatorio = () =>{
     }
   };
 
+  //Função para exportar uma planilha no formato XLSX
   const exportarExcel = () => {
     const registrosFormatados = registros.map(registro => ({
       ...registro,
@@ -49,12 +50,14 @@ const Relatorio = () =>{
     saveAs(arquivoExcel, `registros_${dataInicio}_a_${dataFim}.xlsx`);
   };
   
+  //Função para formatar a forma como a data aparece para o usuário
   const formatarData = (isoString) => {
     if (!isoString) return '';
     const data = new Date(isoString);
     return data.toLocaleDateString('pt-BR');
   };
 
+  //Função para calcular a idade com base na data de nascimento
   const calcularIdade = (dataNasc) => {
     const hoje = new Date();
     const nascimento = new Date(dataNasc);
