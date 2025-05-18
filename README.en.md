@@ -41,7 +41,7 @@ Besides basic patient details, the system records:
 
 The entire API ships in a Docker container for easy setup. Follow these steps:
 
-  **1-Clone the rspository**
+  **1-Clone the repository**
   git clone https://github.com/lhmontech/RX-system.git
   cd Rx-system
 
@@ -63,10 +63,10 @@ The entire API ships in a Docker container for easy setup. Follow these steps:
   | View real-time container logs              | `docker compose logs -f`        |
   | Rebuild just the app                       | `docker compose up --build app` |
 
-  **6-FAQ rápido**
-  *Port 3306 already in use* --> Edit `docker-compose.yml` and change `3306:3306`to `3307:3306` (or another free port).
-  *M1/M2 Apple Silicon* --> Add `platform: linux/amd64` in the service that presents an architure error.
-  *I changed the code, but the container don't update* --> Enable **hot‑reload** in `Dockerfile` (ex.: `nodemon`) or rebuild: `docker compose up --build`.
+  **6-Quick FAQ**
+  - *Port 3306 already in use* --> Edit `docker-compose.yml` and change `3306:3306`to `3307:3306` (or another free port).
+  - *M1/M2 Apple Silicon* --> Add `platform: linux/amd64` in the service that presents an architure error.
+  - *I changed the code, but the container don't update* --> Enable **hot‑reload** in `Dockerfile` (ex.: `nodemon`) or rebuild: `docker compose up --build`.
 
 ⚠️ Make sure you have Docker installed on your machine.
   
