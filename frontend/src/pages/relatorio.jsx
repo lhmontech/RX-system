@@ -104,7 +104,7 @@ const Relatorio = () =>{
           <option value="Perna">Perna</option>
           <option value="Tornozelo">Tonozelo</option>
           <option value="Pé">Pé</option>
-          <option value="Calcâneo">Calacâneo</option>
+          <option value="Calcâneo">Calcâneo</option>
       </select>
       <select name="sexo" className="CmpSexoRelatorio" value={sexo} onChange={(e) => setSexo(e.target.value)}>
           <option value="">Sexo</option>

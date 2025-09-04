@@ -1,2 +1,16 @@
+# Ignorar dependências do Node.js
 node_modules/
+
+# Ignorar variáveis de ambiente
 .env
+
+# Ignorar pastas específicas com dumps ou backups
+database/Dump/
+database/Limpar/
+database/Backup/
+
+# Ignorar build do React (caso esteja incluindo no repo)
+frontend/build/
+
+# Ignorar arquivos de log
+*.log

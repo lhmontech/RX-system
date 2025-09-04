@@ -31,7 +31,7 @@ table tbody tr:nth-child(odd) {
   background: transparent;
   border: none;
   border-radius: 2px;
-  color: #3d3d3d;
+  color: #000000;
   cursor: pointer;
   transition: color 0.3s ease;
   transition: background-color 0.3s ease;
@@ -50,7 +50,7 @@ table tbody tr:nth-child(odd) {
   background: transparent;
   border: none;
   border-radius: 2px;
-  color: #3d3d3d;
+  color: #000000;
   cursor: pointer;
   transition: color 0.3s ease;
   transition: background-color 0.3s ease;
@@ -58,6 +58,21 @@ table tbody tr:nth-child(odd) {
 
 .BotaoEditar:hover {
   color: #ffffff;
-  background-color: #dbd578;
+  background-color: #d4d27e;
+}
+
+.BotaoDuplicar {
+  background: transparent;
+  border: none;
+  border-radius: 2px;
+  color: #000000;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  transition: background-color 0.3s ease;
+}
+
+.BotaoDuplicar:hover {
+  color: #ffffff;
+  background-color: #b1b6ff;
 }
 

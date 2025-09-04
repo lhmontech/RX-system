@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Trash2, SquarePen } from "lucide-react";
+import { Trash2 } from "lucide-react";
 
 const Historico = () => {
   const [dataInicio, setDataInicio] = useState("");

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Trash2, SquarePen } from 'lucide-react';
+import { Trash2, SquarePen, Copy } from 'lucide-react';
 
 const Registro = () => {
   const dataHoje = new Date().toISOString().slice(0, 10);
+  const defaultReex = "Não";
   const initialFormData = {
     prontuario: '',
     nomepaciente: '',
@@ -12,7 +13,7 @@ const Registro = () => {
     exame: '',
     qtdincidencias: '',
     origem: '',
-    reexposicao: '',
+    reexposicao: defaultReex,
     motivo: '',
     datarealizada: dataHoje,
     horapedido: '',
@@ -30,18 +31,19 @@ const Registro = () => {
   };
 
   const handleEdit = (item) => {
-    const dataFormatada = item.datarealizada.split('T')[0];
+    const dataRealizadaFormatada = item.datarealizada.split('T')[0];
+    const dataNascimentoFormatada = item.datanascimento.split('T')[0];
     setFormData({
       prontuario: item.prontuario,
       nomepaciente: item.nomepaciente,
       sexo: item.sexo,
-      datanascimento: item.datanascimento,
+      datanascimento: dataNascimentoFormatada,
       exame: item.exame,
       qtdincidencias: item.qtdincidencias,
       origem: item.origem,
       reexposicao: item.reexposicao,
       motivo: item.motivo,
-      datarealizada: dataFormatada,
+      datarealizada: dataRealizadaFormatada,
       horapedido: item.horapedido,
       horarealizada: item.horarealizada,
       nometecnico: item.nometecnico
@@ -103,6 +105,10 @@ const Registro = () => {
       console.error(err);
       alert("Erro ao buscar prontuário");
     }
+      
+    setTimeout(() => {
+    document.querySelector('.CmpExame')?.focus();
+    }, 0);
   };
 
   const excluirRegistro = async (id) => {
@@ -119,6 +125,36 @@ const Registro = () => {
       alert("Erro ao excluir o registro");
     }
   };
+
+  const duplicarRegistro = (item) => {
+  // Gera data de hoje (ISO AAAA‑MM‑DD)
+  const hojeISO = new Date().toISOString().slice(0, 10);
+
+  // mas limpa/exige os campos que precisam mudar
+  setFormData({
+    prontuario: item.prontuario,
+    nomepaciente: item.nomepaciente,
+    sexo: item.sexo,
+    datanascimento: item.datanascimento.slice(0, 10),
+    exame: '',              // ← obriga escolher
+    qtdincidencias: item.qtdincidencias,
+    origem: item.origem,
+    reexposicao: item.reexposicao,
+    motivo: item.motivo,
+    datarealizada: hojeISO, // ou item.datarealizada.slice(0,10) se preferir copiar
+    horapedido: item.horapedido,
+    horarealizada: '',      // ← obriga digitar
+    nometecnico: item.nometecnico
+  });
+
+  setEditandoId(null); // garante que o submit será INSERT (POST)
+
+  // Foca no campo Exame para o usuário já alterar
+  setTimeout(() => {
+    document.querySelector('.CmpExame')?.focus();
+  }, 0);
+};
+
   const formatarData = (isoString) => {
     if (!isoString) return '';
     const data = new Date(isoString);
@@ -128,13 +164,15 @@ const Registro = () => {
   return (
     <div>
       <h1>Registrar Exame</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={(e) => { e.preventDefault(); buscarProntuario(); }}>
         Prontuário:
         <input name="prontuario" className="CmpProntuario" placeholder="Prontuário" value={formData.prontuario} onChange={handleChange}/>
         <button type="button" onClick={buscarProntuario} className="BotaoBuscar">
           Buscar
         </button>
         <br />
+      </form>
+      <form onSubmit={handleSubmit}>
         <table className="CabecalhoRegistro">
           <tr>
             <td>Nome</td>
@@ -210,7 +248,7 @@ const Registro = () => {
                 <option value="Perna">Perna</option>
                 <option value="Tornozelo">Tonozelo</option>
                 <option value="Pé">Pé</option>
-                <option value="Calcâneo">Calacâneo</option>
+                <option value="Calcâneo">Calcâneo</option>
               </select>
             </td>
             <td>
@@ -230,7 +268,7 @@ const Registro = () => {
               </select>
             </td>
             <td>
-              <input name="reexposicao" className="CmpReexp" type="text" placeholder="Reexp." value={formData.reexposicao} onChange={handleChange}/>
+              <input name="reexposicao" className="CmpReexp" type="text" value={formData.reexposicao} onChange={handleChange}/>
             </td>
             <td>
               <input name="motivo" className="CmpMotivo" type="text" placeholder="Motivo" value={formData.motivo} onChange={handleChange}/>
@@ -263,6 +301,11 @@ const Registro = () => {
         <tbody>
           {registros.map((item) => (
             <tr key={item.id}>
+              <td>
+                <button onClick={() => duplicarRegistro(item)} className="BotaoDuplicar">
+                  <Copy className="icon"/>
+                </button>
+              </td>
               <td>{item.nomepaciente}</td>
               <td>{item.sexo}</td>
               <td>{formatarData(item.datanascimento)}</td>
@@ -276,11 +319,9 @@ const Registro = () => {
               <td>{item.horarealizada}</td>
               <td>{item.nometecnico}</td>
               <td>
-              <td>
                 <button onClick={() => handleEdit(item)} className="BotaoEditar">
                   <SquarePen className="icon"/>
                 </button>
-              </td>
               </td>
               <td>
                 <button onClick={() => excluirRegistro(item.id)} className="BotaoExcluir">

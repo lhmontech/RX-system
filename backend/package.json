@@ -1,4 +1,14 @@
 {
+  "name": "API-Raiox",
+  "version": "1.0.0",
+  "description": "API para registro de atendimentos de pacientes para exames de raio-x",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "db:init": "node init-db.js"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
@@ -9,5 +19,8 @@
   },
   "devDependencies": {
     "nodemon": "^3.1.10"
-  }
+  },
+  "keywords": [],
+  "author": "Lucas Monteiro",
+  "license": "MIT"
 }
