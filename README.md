@@ -29,14 +29,49 @@ Alé de registrar alguns dados pessoais dos pacientes, também é registrado qua
 
 ## 🚀 Como executar o projeto
 
-> ⚠️ Certifique-se de ter o Node.js, MySQL e o React instalados na sua máquina.
+### 1. ⚙️ Pré-requisitos para preparar o ambiente
+Antes de rodar o projeto, você precisa ter instalado:
+- [Node.js (versão 18+)](https://nodejs.org/)
+- [MySQL Server (versão 8+)](https://dev.mysql.com/downloads/mysql/)
 
-## Configurações para rodar o projeto
+### 2. Clonar o repositório
+``bash
+git clone https://github.com/lhmontech/RX-system.git
+cd Rx-system
 
-
-### Backend (API)
-
-```bash
-cd backend
+### 3. Instalar dependências
+**No backend:**
+cd Rx-system/backend
 npm install
+
+**No Frontend**
+cd Rx-system/frontend
+npm install
+
+### 4. Configurar váriaveis do ambiente
+Crie um arquivo .env dentro da pasta backend/ com os dados do seu banco MySQL:
+DB_HOST=localhost
+DB_PORT=3306
+DB_USER=seu_usuario
+DB_PASSWORD=sua_senha
+DB_DATABASE=bdraiox
+
+### 5. Criar banco de dados
+No backend, rode o script para inicializar o banco:
+npm run db:init
+> Esse comando cria o banco, tabelas e insere alguns dados de exemplo.
+
+### 6. Rodar o backend
+cd Rx-system/backend
+node server.js
+
+### 7. Rodar o backend
+cd Rx-system/frontend
 npm start
+
+## 🛠️ Desenvolvido por
+
+**👤 Lucas Monteiro**
+
+- **GitHub:** @lhmontech
+- **LinkedIn:** https://www.linkedin.com/in/lucas-henrique-monteiro-55101a365/
