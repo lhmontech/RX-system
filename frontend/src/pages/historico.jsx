@@ -15,7 +15,7 @@ const Historico = () => {
       if (dataFim) params.append("dataFim", dataFim);
 
       const response = await axios.get(
-        `http://192.168.150.82:3001/api/registros/filtro?${params.toString()}`
+        `http://localhost:3001/api/registros/filtro?${params.toString()}`
       );
       setRegistros(response.data);
     } catch (error) {
@@ -32,7 +32,7 @@ const Historico = () => {
 
     try {
       const resposta = await axios.delete(
-        `http://192.168.150.82:3001/api/registros/${id}`
+        `http://localhost:3001/api/registros/${id}`
       );
       if (resposta.status === 200) {
         await buscarRegistros();
