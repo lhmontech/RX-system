@@ -65,9 +65,14 @@ npm run db:init
 cd Rx-system/backend
 node server.js
 
-### 7. Rodar o backend
+### 7. Rodar o frontend
 cd Rx-system/frontend
 npm start
+
+## Telas
+![Tela principal](/frontend/public/images/Tela-principal.jpg)
+![Tela histórico](/frontend/public/images/Tela-historico.jpg)
+![Tela relatório](/frontend/public/images/Tela-relatorio.jpg)
 
 ## 🛠️ Desenvolvido por
 
