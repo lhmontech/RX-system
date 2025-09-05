@@ -3,25 +3,23 @@ const router = express.Router();
 const { connection, connectPacientes, sql } = require("../database/database");
 
 //Rota para buscar registros através do prontuário - Método GET
-router.get("/prontuario/:id", async (req, res) => {
+router.get("/prontuario/:id", (req, res) => {
   const { id } = req.params;
 
-  try {
-    const pool = await connectPacientes();
-    const result = await pool
-      .request()
-      .input("prontuario", sql.VarChar, id)
-      .query("SELECT * FROM szpaciente WHERE prontuario = @prontuario");
+  const query = `SELECT * FROM szpaciente WHERE prontuario = ? LIMIT 1`;
 
-    if (result.recordset.length === 0) {
+  connectPacientes.query(query, [id], (err, results) => {
+    if (err) {
+      console.error('Erro ao executar a query:', err); // <- Veja o terminal
+      return res.status(500).json({ error: "Erro no banco de dados", detalhes: err.message });
+    }
+
+    if (results.length === 0) {
       return res.status(404).json({ message: "Prontuário não encontrado" });
     }
 
-    res.json(result.recordset[0]);
-  } catch (err) {
-    console.error("Erro ao buscar prontuário:", err);
-    res.status(500).json({ error: "Erro no banco de dados" });
-  }
+    res.json(results[0]);
+  });
 });
 
 //Rota para inclusão de dados - Método POST
