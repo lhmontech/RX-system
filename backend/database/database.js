@@ -20,7 +20,7 @@ connection.connect((err) => {
 });
 
 // Conexão com banco de pacientes
-const connection = mysql.createConnection({
+const connectPacientes = mysql.createConnection({
   host: process.env.PACIENTES_DB_HOST,
   user: process.env.PACIENTES_DB_USER,
   password: process.env.PACIENTES_DB_PASSWORD,
@@ -28,7 +28,7 @@ const connection = mysql.createConnection({
   port: process.env.PACIENTES_DB_PORT,
 });
 
-connection.connect((err) => {
+connectPacientes.connect((err) => {
   if (err) {
     console.error("Erro ao conectar no banco de dados:", err);
   } else {
