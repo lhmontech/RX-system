@@ -1,5 +1,3 @@
-![Logo](/frontend/public/images/x-ray.png)
-
 # 🏥 Sistema de Registro de Atendimentos de Raio-X
 
 Este projeto é uma API desenvolvida com **Node.js**, **Express**, **React**, **MySQL**, **HTML** e **CSS**. Ele tem como objetivo otimizar o processo de **registro de atendimentos de pacientes** que realizam exames de raio-x em um hospital.
