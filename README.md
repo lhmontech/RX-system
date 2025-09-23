@@ -1,5 +1,5 @@
 <p align="center">
-      <img src="frontend\public\images\x-ray.png" alt="logo da Buzz Tech" width="200">
+      <img src="frontend\public\images\x-ray.png" alt="logo raio-x" width="200">
       <h2 align="center">Registros Raio-x</h2>
 </p>
 
