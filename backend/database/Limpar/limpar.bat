@@ -1,1 +1,0 @@
-node C:\RX-system\backend\database\Limpar\limparRegistro.js
