@@ -40,7 +40,7 @@ Alé de registrar alguns dados pessoais dos pacientes, também é registrado qua
 ### 1. ⚙️ Pré-requisitos para preparar o ambiente
 Antes de rodar o projeto, você precisa ter instalado:
 - [![Node.js](https://img.shields.io/badge/Node.js(18+)-009929?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
-- [![MySQL Server](https://img.shields.io/badge/MySQL_Server(8+)-63DEFD?style=for-the-badge&logo=MySQL&logoColor=black)]([https://nodejs.org/](https://dev.mysql.com/downloads/mysql/))
+- [![MySQL Server](https://img.shields.io/badge/MySQL_Server(8+)-63DEFD?style=for-the-badge&logo=MySQL&logoColor=black)](https://dev.mysql.com/downloads/mysql/)
 
 ### 2. Clonar o repositório e acessar a pasta
 ```bash
