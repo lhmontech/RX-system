@@ -32,7 +32,7 @@ Alé de registrar alguns dados pessoais dos pacientes, também é registrado qua
 - **Backend**: Node.js, Express
 - **Banco de Dados**: MySQL
 
-## Manual do sistema
+## 📝 Manual do sistema
 <a href="Manual-API-Raiox.pdf"><img width="50" alt="image" src="https://github.com/user-attachments/assets/75c8261e-db12-48b2-bee5-f05255820bdb" /></a>
 
 ## 🚀 Como executar o projeto
@@ -59,7 +59,7 @@ cd Rx-system/backend
 npm install
 ```
 
-**No Frontend**
+**No Frontend:**
 ```bash
 cd Rx-system/frontend
 ```
