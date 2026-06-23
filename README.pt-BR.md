@@ -36,11 +36,6 @@ Alé de registrar alguns dados pessoais dos pacientes, também é registrado qua
 - **Backend**: Node.js, Express
 - **Banco de Dados**: MySQL
 
-## 📥 Download
-
-Você pode baixar a versão mais recente do sistema no link abaixo:<br>
-👉 [Baixar o instalador (Windows)](https://github.com//lhmontech/Radiology-System/releases/download/v1.0.0/RX_installer_v1.exe)
-
 ## Telas
 ![Tela principal](/frontend/public/images/record-screen.jpg)
 ![Tela histórico](/frontend/public/images/historic-screen.jpg)
