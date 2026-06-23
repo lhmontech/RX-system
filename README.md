@@ -37,14 +37,9 @@ In addition to recording patient personal data, the system also stores informati
 * **Backend**: Node.js, Express
 * **Database**: MySQL
 
-## 📥 Download
-
-You can download the latest version of the system using the link below:<br>
-👉 [Download installer (Windows)](https://github.com//lhmontech/Radiology-System/releases/download/v1.0.0/RX_installer_v1.exe)
-
 ## Screens
 
-https://github.com/user-attachments/assets/8bedbb2b-ae9b-42f1-88d2-dc91c2059fd9
+https://github.com/user-attachments/assets/9a6b8299-4b4f-4724-ba00-8b50d4c84fc7
 
 ## 🛠️ Developed by
 
